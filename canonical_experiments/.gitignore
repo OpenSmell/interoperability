@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+results/figures/*.png
+results/tables/*.txt
+results/metrics.json
+results/run_summary.json
+data/uci/**/*.dat
