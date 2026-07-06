@@ -13,6 +13,9 @@ EXPERIMENTS = [
     ("Experiment 2: Leave-Substance-Out", "02_leave_substance_out.py"),
     ("Experiment 3: UCI Drift Stability", "03_uci_drift.py"),
     ("Experiment 4: Normalization Comparison", "04_normalization_comparison.py"),
+    ("Experiment 5: Ablation Study", "05_ablation.py"),
+    ("Experiment 6: Baseline Comparison", "06_baseline_comparison.py"),
+    ("Experiment 7: Cross-Device Sanity Check", "07_cross_device_sanity.py"),
 ]
 
 POST_PROCESSING = [

@@ -155,9 +155,83 @@ def table6_sensor_roadmap():
     return "\n".join(lines)
 
 
+def table7_ablation(metrics):
+    """Table 7: Ablation study — Dimension 1 feature subgroups."""
+    exp5 = metrics.get("experiment_5", {})
+    baseline = exp5.get("baseline_accuracy")
+    ablations = exp5.get("ablations", {})
+    n_dim1 = exp5.get("n_dim1_features", 0)
+    lines = []
+    lines.append("=" * 80)
+    lines.append("Table 7: Ablation Study — Dimension 1 (Device-Agnostic) Features")
+    lines.append("=" * 80)
+    lines.append(f"{'Ablation':<30s} | {'Mean Acc':>8s} | {'Std':>5s} | {'Δ from Dim1':>10s}")
+    lines.append("-" * 80)
+    if baseline is not None:
+        lines.append(f"{'Dimension 1 (all ' + str(n_dim1) + ' feats)':<30s} | {baseline*100:>7.1f}% | {'—':>5s} | {'—':>10s}")
+        for gname in sorted(ablations.keys()):
+            d = ablations[gname]
+            label = gname.replace("_", " ").replace("Remove ", "")
+            delta = d["delta_from_dim1_baseline"]
+            delta_str = f"{delta*100:+.1f}%"
+            lines.append(f"{'  Without ' + label:<30s} | {d['mean_accuracy']*100:>7.1f}% | {d['std_accuracy']*100:>4.1f}% | {delta_str:>10s}")
+    else:
+        lines.append("  No data available")
+    lines.append("=" * 80)
+    return "\n".join(lines)
+
+
+def table8_baseline_comparison():
+    """Table 8: Baseline comparison across methods."""
+    try:
+        import csv
+        csv_path = Path(__file__).resolve().parent / "results" / "baseline_comparison.csv"
+        if not csv_path.exists():
+            return "Table 8: No baseline comparison data. Run 06_baseline_comparison.py first."
+        lines = []
+        lines.append("=" * 100)
+        lines.append("Table 8: Baseline Comparison — Session-Invariance Accuracy")
+        lines.append("=" * 100)
+        lines.append(f"{'Rank':>5s} | {'Method':<40s} | {'Accuracy':>9s}")
+        lines.append("-" * 100)
+        with open(csv_path) as f:
+            reader = csv.DictReader(f)
+            for i, row in enumerate(reader, 1):
+                lines.append(f"{i:>5d} | {row['Method']:<40s} | {row['Accuracy']:>9s}")
+        lines.append("=" * 100)
+        return "\n".join(lines)
+    except Exception:
+        return "Table 8: Error loading baseline comparison."
+
+
+def table9_cross_device_sanity():
+    """Table 9: Cross-device sanity check results."""
+    try:
+        import csv
+        csv_path = Path(__file__).resolve().parent / "results" / "cross_device_sanity.csv"
+        if not csv_path.exists():
+            return "Table 9: No cross-device data. Run 07_cross_device_sanity.py first."
+        lines = []
+        lines.append("=" * 110)
+        lines.append("Table 9: Cross-Device Sanity Check — Zero-Shot Transfer (Informal)")
+        lines.append("=" * 110)
+        lines.append(f"{'Method':<55s} | {'Accuracy':>8s} | {'Chance':>8s} | {'p-value':>8s}")
+        lines.append("-" * 110)
+        with open(csv_path) as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                lines.append(f"{row['Method']:<55s} | {row['Accuracy']:>8s} | {row['Chance']:>8s} | {row['p_value']:>8s}")
+        lines.append("-" * 110)
+        lines.append("Limitations: Different recording times/concentrations, no enclosure.")
+        lines.append("" + "=" * 110)
+        return "\n".join(lines)
+    except Exception:
+        return "Table 9: Error loading cross-device data."
+
+
 def run():
     print("=" * 70)
-    print("Generating Tables (1-6)")
+    print("Generating Tables (1-9)")
     print("=" * 70)
     TABLES_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -172,6 +246,9 @@ def run():
         "table4_leave_substance_out": table4_leave_substance_out(metrics),
         "table5_normalization_comparison": table5_normalization_comparison(metrics),
         "table6_sensor_roadmap": table6_sensor_roadmap(),
+        "table7_ablation": table7_ablation(metrics),
+        "table8_baseline_comparison": table8_baseline_comparison(),
+        "table9_cross_device_sanity": table9_cross_device_sanity(),
     }
 
     for name, content in tables.items():
@@ -182,7 +259,8 @@ def run():
     all_tables = []
     for name in ["table1_taxonomy", "table2_sensor_count", "table3_chemical_boundaries",
                   "table4_leave_substance_out", "table5_normalization_comparison",
-                  "table6_sensor_roadmap"]:
+                  "table6_sensor_roadmap", "table7_ablation", "table8_baseline_comparison",
+                  "table9_cross_device_sanity"]:
         all_tables.append(tables[name])
         all_tables.append("")
 

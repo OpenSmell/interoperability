@@ -173,9 +173,54 @@ def fig4_normalization_comparison(metrics):
     print(f"  Saved {outpath}")
 
 
+def fig5_ablation(metrics):
+    """Figure 5: Ablation study bar chart (Dimension 1 only)."""
+    exp5 = metrics.get("experiment_5", {})
+    ablations = exp5.get("ablations", {})
+    if not ablations and exp5.get("baseline_accuracy") is None:
+        print("  SKIP fig5: no ablation data")
+        return
+    if not HAS_MATPLOTLIB:
+        print("  SKIP fig5: matplotlib not available")
+        return
+
+    labels = ["Dim 1 (all)"]
+    means = [exp5["baseline_accuracy"] * 100]
+    stds = [0.0]
+    for group_name in sorted(ablations.keys()):
+        label = group_name.replace("Remove_", "W/o ").replace("_", " ")
+        labels.append(label)
+        d = ablations[group_name]
+        means.append(d["mean_accuracy"] * 100)
+        stds.append(d["std_accuracy"] * 100)
+
+    chance = exp5.get("mean_chance", 0.02) * 100
+    colors = ["seagreen"] + ["coral"] * (len(labels) - 1)
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    x = np.arange(len(labels))
+    bars = ax.bar(x, means, yerr=stds, color=colors, capsize=4, edgecolor="black", linewidth=0.5)
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=30, ha="right")
+    ax.set_ylabel("Session-Invariance Accuracy (%)")
+    ax.set_title("Figure 5: Ablation Study — Dimension 1 (Device-Agnostic) Subgroups")
+    ax.axhline(y=chance, color="gray", linestyle=":", linewidth=1.5,
+               label=f"Chance ({chance:.0f}%)")
+    ax.legend()
+    for bar, m in zip(bars, means):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + max(stds + [1]) + 0.5,
+                f"{m:.1f}%", ha="center", fontsize=9, fontweight="bold")
+    ax.set_ylim(0, 105)
+    plt.tight_layout()
+    outpath = FIGURES_DIR / "fig5_ablation.png"
+    plt.savefig(outpath, dpi=150)
+    plt.close()
+    print(f"  Saved {outpath}")
+
+
 def run():
     print("=" * 70)
-    print("Generating Figures (1-4)")
+    print("Generating Figures (1-5)")
     print("=" * 70)
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -187,6 +232,7 @@ def run():
     fig2_leave_substance_out(metrics)
     fig3_uci_drift(metrics)
     fig4_normalization_comparison(metrics)
+    fig5_ablation(metrics)
 
     print(f"\n  All figures saved to {FIGURES_DIR}")
 

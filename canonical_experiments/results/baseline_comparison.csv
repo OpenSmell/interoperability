@@ -1,0 +1,6 @@
+Method,Accuracy,Feature_Type
+Framework features (ours),88.5%,145-dim physics-derived features
+Contrastive 1D-CNN (ours),81.78%,Learned representation on raw (100,6) windows
+Raw voltages + RandomForest,63.3%,Raw 600-dim time series (no feature engineering)
+ScentFormer (Transformer),53.0%,Learned representation (Feng et al. 2025)
+R/R₀ time series + RandomForest,37.5%,Rs/R₀ normalized 600-dim time series

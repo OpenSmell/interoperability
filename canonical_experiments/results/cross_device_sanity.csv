@@ -1,0 +1,7 @@
+Method,Accuracy,Chance,p_value,N_Windows,Source,Notes
+30-dim paradigm features (6 ch, 4-class),11.9%,25.0%,n.s.,59,research/cross_device_paradigm_analysis/,Full 6-channel device-agnostic features. Near chance.
+145-dim framework features (6 ch, 4-class),18.6%,25.0%,n.s.,59,research/cross_device_145dim_analysis/,Full framework with device-specific dimensions. Still near chance.
+30-dim paradigm (garlic vs ginger, 2-class),~57%,50.0%,~0.15,~53,research/paradigm-experiments/,2-class subset. Not statistically significant (1.0σ above chance).
+15-dim shared sensors (MQ-3, MQ-7, MQ-135, 4-class),10.2%,25.0%,0.999,59,research/shared_sensors_experiment/,Same physical sensor models on both devices. Still at chance.
+MQ-3 only (5-dim, 4-class),6.8%,25.0%,0.999,59,research/ (test_mq3_only.py),MQ-3 is same model on both devices, yet performs below chance.
+MQ-135 VOC only (5-dim, 4-class),40.7%,25.0%,borderline,59,research/cross_device_paradigm_analysis/,Best single channel. Weak evidence of partial transferability.
