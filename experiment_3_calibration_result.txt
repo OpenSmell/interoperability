@@ -1,0 +1,72 @@
+========================================================================
+EXPERIMENT 3 — UCI TWO-POINT (a,b) vs SINGLE-POINT M CALIBRATION
+Split: early 1-3 vs late 8-10   A=[1, 2, 3]  B=[8, 9, 10]
+========================================================================
+Chance (6 classes) = 16.7%  |  magnitude-only dims = 32  |  full dims = 128
+
+Leave-one-out (test gas excluded from the alignment fit):
+model  condition  mean acc  per-gas accs
+mag    raw        37.8%      74.4  68.5  28.1   0.7  55.2   0.0
+mag    m          20.4%      43.0  24.5   5.8  17.5  31.5   0.1
+mag    power      27.9%      24.0  23.1  13.2   1.1  97.9   7.9
+full   raw        38.8%      65.0  54.0  47.7  14.1  52.0   0.0
+full   m          38.8%      65.0  54.0  47.7  14.1  52.0   0.0
+full   power      38.8%      65.0  54.0  47.7  14.1  52.0   0.0
+
+Pooled fit (all 6 gases — optimistic upper bound):
+mag    raw        37.8%
+mag    m          39.7%
+mag    power      35.0%
+full   raw        38.9%
+full   m          38.9%
+full   power      38.9%
+
+Within-device ceiling (train+test on A): mag 100.0%   full 100.0%
+
+Delta (aligned minus raw), LOO mean:
+  mag     single-point M: -17.4 pp   two-point power:  -9.9 pp
+  full    single-point M:  +0.0 pp   two-point power:  +0.0 pp
+Pooled fit parameters (primary split), first 8 amplitude features:
+feat   sensor          M          g        d      R2
+0      0           3.301     2.6816    0.792   0.383
+1      0           1.616     1.1656    0.620   0.426
+8      1           2.184     8.4971    0.730   0.464
+9      1           1.059     1.5382    0.594   0.295
+16     2           2.347     0.7708    0.963   0.548
+17     2           1.516     1.1338    0.795   0.360
+24     3           2.302     0.6729    0.978   0.565
+25     3           1.511     1.2623    0.723   0.350
+
+Median fitted exponent d = 0.727; degenerate (d<=0.05) channels: 0/32
+========================================================================
+EXPERIMENT 3 — UCI TWO-POINT (a,b) vs SINGLE-POINT M CALIBRATION
+Split: early 1-5 vs late 6-10   A=[1, 2, 3, 4, 5]  B=[6, 7, 8, 9, 10]
+========================================================================
+Chance (6 classes) = 16.7%  |  magnitude-only dims = 32  |  full dims = 128
+
+Leave-one-out (test gas excluded from the alignment fit):
+model  condition  mean acc  per-gas accs
+mag    raw        42.7%      53.0  71.0  46.7  17.1  68.4   0.0
+mag    m          34.4%      57.1  57.2  45.5  10.1  35.8   0.6
+mag    power      43.1%      42.6  54.1  51.1   9.1  97.2   4.3
+full   raw        50.0%      77.0  72.5  60.6  22.0  67.7   0.0
+full   m          50.0%      77.0  72.5  60.6  22.0  67.7   0.0
+full   power      50.0%      77.0  72.5  60.6  22.0  67.7   0.0
+
+Pooled fit (all 6 gases — optimistic upper bound):
+mag    raw        44.5%
+mag    m          47.5%
+mag    power      49.5%
+full   raw        51.3%
+full   m          51.3%
+full   power      51.3%
+
+Within-device ceiling (train+test on A): mag 100.0%   full 100.0%
+
+Delta (aligned minus raw), LOO mean:
+  mag     single-point M:  -8.3 pp   two-point power:  +0.4 pp
+  full    single-point M:  +0.0 pp   two-point power:  +0.0 pp
+
+VERDICT (see experiment_3_analysis.md)
+- Two-point power law is justified only if its LOO gain exceeds single-point M by a material margin.
+- If both fail, feature discipline (magnitude-only) remains the binding lever, not calibration order.

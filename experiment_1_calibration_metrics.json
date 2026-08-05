@@ -1,0 +1,18 @@
+{
+  "raw_accuracy": 0.08333333333333333,
+  "aligned_accuracy_loo": 0.08333333333333333,
+  "aligned_accuracy_pooled": 0.08333333333333333,
+  "delta_pp": 0.0,
+  "n_test_windows": 12,
+  "classes": [
+    "cinnamon",
+    "garlic",
+    "banana"
+  ],
+  "external_baseline_33.3pct": true,
+  "sensitivity_banana_excluded": {
+    "raw": 0.0,
+    "aligned_loo": 0.0
+  },
+  "verdict": "single-point M gives +0.0 pp on real 13-file test; see experiment_1_analysis.md"
+}
