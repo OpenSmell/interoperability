@@ -1,0 +1,52 @@
+============================================================================
+PART A — UCI CHEMICAL-CLASS COARSENING (real drift A->B)
+============================================================================
+Fine: 6 gases (chance 16.7%) | Coarse: ['alcohol', 'carbonyl', 'hydrocarbon', 'amine'] (chance 25.0%)
+
+--- early 1-3 vs late 8-10  A=[1, 2, 3] B=[8, 9, 10]
+  mag  fine:  cross  36.5%  within 100.0%  TE  23.9%
+  mag  coarse: cross  43.9%  within 100.0%  TE  25.2%   collapse-of-fine  37.9%
+  mag  within-class error share (fine preds, B): observed   2.2%  chance  15.2%  (n=2769)
+  full fine:  cross  38.3%  within 100.0%  TE  25.9%
+  full coarse: cross  45.9%  within 100.0%  TE  27.8%   collapse-of-fine  38.9%
+  full within-class error share (fine preds, B): observed   1.1%  chance  15.4%  (n=2694)
+  coarse-collapse per-class (B): alcohol=65%  carbonyl=36%  hydrocarbon=24%  amine=49%
+
+--- early 1-5 vs late 6-10  A=[1, 2, 3, 4, 5] B=[6, 7, 8, 9, 10]
+  mag  fine:  cross  44.0%  within 100.0%  TE  32.8%
+  mag  coarse: cross  53.5%  within 100.0%  TE  38.0%   collapse-of-fine  46.9%
+  mag  within-class error share (fine preds, B): observed   5.3%  chance  15.0%  (n=5757)
+  full fine:  cross  49.0%  within 100.0%  TE  38.8%
+  full coarse: cross  58.7%  within 100.0%  TE  45.0%   collapse-of-fine  50.7%
+  full within-class error share (fine preds, B): observed   3.3%  chance  16.6%  (n=5237)
+  coarse-collapse per-class (B): alcohol=75%  carbonyl=48%  hydrocarbon=36%  amine=64%
+
+============================================================================
+PART B — SMELLNET PARADIGMS -> OSMO GRAND FAMILY
+============================================================================
+8 grand families: ['Citrus', 'Floral', 'Fruity', 'Green', 'Herbal', 'Mineral', 'Soulful', 'Woody'] (chance 12.5%)
+Label balance: Citrus=2, Floral=1, Fruity=10, Green=8, Herbal=7, Mineral=1, Soulful=2, Woody=19
+
+300 recordings, 50 substances, 30-dim paradigms
+LSO family accuracy: 40.7% (balanced 21.1%; chance 12.5%)
+LSO substance accuracy: 0.0% (chance 2.0%)
+Family confusion (rows=true):
+      Citrus    Floral    Fruity     Green    Herbal   Mineral   Soulful     Woody
+      Citrus         0         0         5         0         1         0         0         6
+      Floral         0         0         1         1         2         0         0         2
+      Fruity         5         0        12        19         5         2         8         9
+       Green         0         0        14        20         1         1         4         8
+      Herbal         0         2         4         3        19         2         0        12
+     Mineral         1         0         3         2         0         0         0         0
+     Soulful         0         0         3         8         0         0         0         1
+       Woody        10         2         6         9        15         0         1        71
+
+--- Cross-device: SmellNet-trained family RF -> USER rig paradigms ---
+  banana         OSMO=Fruity    predicted=Woody     [MISMATCH]  Woody:1
+  cinnamon       OSMO=Woody     predicted=Woody     [OK]  Woody:1
+  garlic         OSMO=Mineral   predicted=Woody     [MISMATCH]  Woody:5
+  ginger         OSMO=Woody     predicted=Woody     [OK]  Woody:2
+  lemon          OSMO=Citrus    predicted=Woody     [MISMATCH]  Woody:1
+  mosquito_coil  OSMO=unlabelled predicted=Woody     [?]  Woody:5
+  onion          OSMO=unlabelled predicted=Woody     [?]  Woody:2
+  room_air       OSMO=unlabelled predicted=Woody     [?]  Woody:1
