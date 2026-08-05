@@ -18,6 +18,30 @@ This repository validates the framework through seven experiments:
 | 6 | **Baseline Comparison** | Framework (89.5%) > 1D-CNN (81.78%) > raw voltages (63.3%) > ScentFormer (53.0%) > R/R₀ (37.5%) |
 | 7 | **Cross-Device Sanity** | Zero-shot transfer fails (10-18% vs 25% chance), consistent with Theorem 2 |
 
+## Cross-Device Calibration / Alignment Arc (Exps 1-7)
+
+Beyond the seven canonical experiments above, a second numbered series in the
+repo root attacks the remaining cross-device transfer paths from the paper's
+interoperability agenda. Each is falsifiable, LOO-fair, and documented with an
+`*_analysis.md`. **Headline: every reference-free alignment is falsified; gains
+appear only when the target substance's own reference samples enter the fit
+(calibration data), confirming Theorem 2.**
+
+| # | Script | Venue | LOO-fair result |
+|---|--------|-------|-----------------|
+| 1 | `experiment_1_calibration.py` | real SmellNet→user, single-point M | +0.0 pp |
+| 2 | `experiment_2_synthetic_probe.py` | synthetic gain/exponent/batch | M sound for gain only |
+| 3 | `experiment_3_calibration.py` | UCI two-point (a,b) vs M | mag ≤ +0.4 pp, full +0.0 |
+| 4 | `experiment_4_coral.py` | UCI CORAL covariance map | coral_ref mixed; coral_all +5–8 pp (transductive) |
+| 5 | `experiment_5_anchors.py` | real rig, 3-anchor affine/Procrustes | +0.0 pp |
+| 6 | `experiment_6_taxonomy.py` | UCI classes + SmellNet→OSMO | within-class error share below chance; user→Woody |
+| 7 | `experiment_7_chemoprint.py` | UCI sensor→chemoprint | within 99.6% → cross 2.4%/−5.0% |
+
+Run individually from the repo root with the repo venv, e.g.
+`python interoperability/experiment_4_coral.py`. Details in each
+`*_analysis.md`; all are folded into `private/OPENSMELL_MASTER.md` §8.3, §8.7,
+§10.10 and §9.4.
+
 ## Quick Start
 
 ```bash
