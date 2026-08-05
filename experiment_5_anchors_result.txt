@@ -1,0 +1,39 @@
+========================================================================
+EXPERIMENT 5 — ANCHOR-BASED SUPERVISED ALIGNMENT (user rig)
+========================================================================
+Chance = 25% (4 SmellNet classes) | magnitude subspace = 9 dims
+Anchors (shared substances): ['cinnamon', 'garlic', 'banana'] | OOV probe: lime
+SmellNet 5-fold CV (magnitude-only 9-dim): 74.7% (58.1-82.6%)
+
+--- RAW (no alignment) ---
+  mag9 RAW overall: 0.0% (cinnamon:0/3  garlic:0/6  banana:0/3)
+  full RAW overall: 8.3% (cinnamon:0/3  garlic:0/6  banana:1/3)
+
+--- ALIGNED, leave-one-anchor-out (map fit on the OTHER anchors) ---
+  test=cinnamon anchors=['garlic', 'banana']  raw:0.0%  affine:0.0%  proc:0.0%
+    proc scale=0.061  affine slopes min=-4.831 max=0.023
+  test=garlic   anchors=['cinnamon', 'banana']  raw:0.0%  affine:0.0%  proc:0.0%
+    proc scale=0.116  affine slopes min=-1.150 max=0.611
+  test=banana   anchors=['cinnamon', 'garlic']  raw:0.0%  affine:0.0%  proc:0.0%
+    proc scale=1.263  affine slopes min=-11.522 max=13.990
+
+--- ALIGNED, pooled over all anchors (optimistic upper bound) ---
+  test=cinnamon  affine:100.0%  proc:100.0%
+  test=garlic    affine:0.0%  proc:0.0%
+  test=banana    affine:100.0%  proc:100.0%
+  pooled proc scale=0.042
+
+--- LIME out-of-vocabulary probe (user-only; class mix) ---
+  raw         garlic:49.5%  cinnamon:26.5%  ginger:14.2%
+  affine(pool) cinnamon:45.5%  banana:30.7%  ginger:23.5%
+  proc(pool)  banana:53.5%  garlic:22.2%  cinnamon:21.0%
+
+--- FULL model + proc(pool) alignment applied to the 9 mag dims only ---
+  full + proc(pool) overall: 8.3%
+
+========================================================================
+VERDICT
+========================================================================
+3 shared substances as anchors; magnitude-only 9-dim subspace; LOO discipline.
+With 2-3 anchors the map is underdetermined in the 8-9 dim complement;
+held-out substances are off the anchor span. See experiment_5_analysis.md.

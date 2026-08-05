@@ -1,0 +1,38 @@
+{
+  "mag9_cv_within_smellnet": 0.7474576271186439,
+  "loo": {
+    "cinnamon": {
+      "raw": 0.0,
+      "affine": 0.0,
+      "proc": 0.0
+    },
+    "garlic": {
+      "raw": 0.0,
+      "affine": 0.0,
+      "proc": 0.0
+    },
+    "banana": {
+      "raw": 0.0,
+      "affine": 0.0,
+      "proc": 0.0
+    }
+  },
+  "pooled": {
+    "affine": {
+      "cinnamon": 1.0,
+      "garlic": 0.0,
+      "banana": 1.0
+    },
+    "proc": {
+      "cinnamon": 1.0,
+      "garlic": 0.0,
+      "banana": 1.0
+    }
+  },
+  "proc_scale_pooled": 0.04247660579405039,
+  "n_test_windows": {
+    "cinnamon": 3,
+    "garlic": 6,
+    "banana": 3
+  }
+}
