@@ -39,14 +39,16 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import cross_val_score
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "opensmell"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(REPO / "opensmell"))
 
 from opensmell.mox.features import extract_all_framework_features
 
-SMELLNET_DIR = ROOT / "SmellNet" / "neurips-data-processed"
+SMELLNET_DIR = REPO / "SmellNet" / "neurips-data-processed"
 USER_RECS = Path.home() / "Osmograph_Recordings"
-CACHE_PATH = ROOT / "interoperability" / "experiment_1_features_cache.npz"
+CACHE_PATH = HERE / "experiment_1_features_cache.npz"
 
 SENSOR_NAMES = ["NO2", "C2H5OH", "VOC", "CO", "Alcohol", "LPG"]
 LIVE = [2, 4, 5]  # VOC, Alcohol, LPG — the populated channels on the user rig
@@ -426,7 +428,7 @@ def run():
         L(f"  ALIGNED : {sa_acc*100:.1f}% ({sum(1 for p,t in zip(sa_preds,sa_trues) if p==t)}/{len(sa_trues)})")
         L(f"  Delta   : {sa_acc*100 - sr_acc*100:+.1f} pp")
 
-    out = ROOT / "interoperability" / "experiment_1_calibration_result.txt"
+    out = HERE / "results" / "experiment_1_calibration_result.txt"
     out.write_text("\n".join(report) + "\n")
     print(f"\nWrote {out}", flush=True)
 
@@ -442,7 +444,7 @@ def run():
         "verdict": "single-point M gives +0.0 pp on real 13-file test; "
                    "see experiment_1_analysis.md",
     }
-    (ROOT / "interoperability" / "experiment_1_calibration_metrics.json").write_text(
+    (HERE / "results" / "experiment_1_calibration_metrics.json").write_text(
         json.dumps(summary, indent=2))
 
 

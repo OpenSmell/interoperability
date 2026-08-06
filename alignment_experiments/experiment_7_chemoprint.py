@@ -37,9 +37,12 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "interoperability" / "canonical_experiments"))
-sys.path.insert(0, str(ROOT / "Chemoprint"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(INTEROP / "canonical_experiments"))
+sys.path.insert(0, str(REPO / "Chemoprint"))
+sys.path.insert(0, str(HERE))
 
 from load_uci import load_all_batches, GAS_NAMES
 from experiment_3_calibration import (
@@ -158,11 +161,11 @@ def run():
     L("feature manifold. Variance-weighted R2 is dominated by the MW/heavy-atom")
     L("and topological dims; functional-group flags are all-zero for these 6 gases.")
 
-    out = ROOT / "interoperability" / "experiment_7_chemoprint_result.txt"
+    out = HERE / "results" / "experiment_7_chemoprint_result.txt"
     out.write_text("\n".join(lines) + "\n")
     print(f"\nWrote {out}", flush=True)
     metrics["per_dim_r2_full_cross_AB"] = pd_table
-    (ROOT / "interoperability" / "experiment_7_chemoprint_metrics.json").write_text(
+    (HERE / "results" / "experiment_7_chemoprint_metrics.json").write_text(
         json.dumps(metrics, indent=2, default=float))
     print("Wrote metrics JSON", flush=True)
 

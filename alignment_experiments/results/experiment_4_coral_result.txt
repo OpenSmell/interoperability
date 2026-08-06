@@ -1,0 +1,34 @@
+========================================================================
+EXPERIMENT 4 — CORAL ALIGNMENT  [early 1-3 vs late 8-10]  A=[1, 2, 3] B=[8, 9, 10]
+========================================================================
+Chance = 16.7% | LOO discipline: held-out gas excluded from coral-ref
+model  condition    mean acc  per-gas accs
+mag    raw           36.6%      77.0  58.1  31.8   1.4  51.2   0.0
+mag    coral_ref     32.6%      88.1   1.8  15.1  12.1  78.2   0.0
+mag    coral_all     39.9%      58.2  69.8  19.2  17.7  74.5   0.0
+full   raw           38.1%      65.0  48.3  48.8  14.0  52.4   0.0
+full   coral_ref     40.0%      87.4   8.5   1.6  56.6  85.7   0.0
+full   coral_all     45.4%      76.8  66.7   4.7  61.7  62.5   0.0
+
+Pooled (transductive over all B — optimistic):
+  mag    raw  36.5%  coral_all  40.3%  delta +3.8 pp
+  full   raw  38.3%  coral_all  45.2%  delta +6.9 pp
+  LOO delta: mag coral-ref -4.0 pp   coral-all +3.3 pp
+  LOO delta: full coral-ref +1.9 pp   coral-all +7.3 pp
+========================================================================
+EXPERIMENT 4 — CORAL ALIGNMENT  [early 1-5 vs late 6-10]  A=[1, 2, 3, 4, 5] B=[6, 7, 8, 9, 10]
+========================================================================
+Chance = 16.7% | LOO discipline: held-out gas excluded from coral-ref
+model  condition    mean acc  per-gas accs
+mag    raw           42.9%      51.3  68.6  56.1  17.9  63.5   0.0
+mag    coral_ref     43.0%      52.5  53.2  61.9  15.0  75.3   0.0
+mag    coral_all     49.1%      65.5  77.3  49.8  23.0  79.1   0.0
+full   raw           48.2%      75.1  69.2  64.0  20.5  60.3   0.0
+full   coral_ref     51.4%      96.9  58.5  52.8  33.2  67.0   0.0
+full   coral_all     55.5%      92.3  77.9  53.1  39.0  70.6   0.0
+
+Pooled (transductive over all B — optimistic):
+  mag    raw  44.0%  coral_all  51.3%  delta +7.3 pp
+  full   raw  49.0%  coral_all  57.2%  delta +8.2 pp
+  LOO delta: mag coral-ref +0.1 pp   coral-all +6.2 pp
+  LOO delta: full coral-ref +3.2 pp   coral-all +7.3 pp

@@ -43,9 +43,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "opensmell"))
-sys.path.insert(0, str(ROOT / "interoperability"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(REPO / "opensmell"))
+sys.path.insert(0, str(HERE))
 
 from experiment_1_calibration import (collect, feature_columns, LIVE, OVERLAP,
     SMELLNET_CLASSES, apply_alignment, fit_m, N_ESTIMATORS, RANDOM_STATE)
@@ -180,7 +182,7 @@ def run():
     print("magnitude-only model isolates M's mathematical adequacy;", flush=True)
     print("full model shows dilution by device-bound/kinetic features.", flush=True)
 
-    out = ROOT / "interoperability" / "experiment_2_synthetic_metrics.json"
+    out = HERE / "results" / "experiment_2_synthetic_metrics.json"
     out.write_text(json.dumps(rows, indent=2, default=float))
     print(f"\nWrote {out}", flush=True)
 

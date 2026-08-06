@@ -40,8 +40,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "interoperability" / "canonical_experiments"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(INTEROP / "canonical_experiments"))
 
 from load_uci import load_all_batches, GAS_NAMES
 
@@ -334,11 +336,11 @@ def run():
     all_lines.append("- If both fail, feature discipline (magnitude-only) "
                      "remains the binding lever, not calibration order.")
 
-    out = ROOT / "interoperability" / "experiment_3_calibration_result.txt"
+    out = HERE / "results" / "experiment_3_calibration_result.txt"
     out.write_text("\n".join(all_lines) + "\n")
     print(f"\nWrote {out}", flush=True)
 
-    (ROOT / "interoperability" / "experiment_3_calibration_metrics.json").write_text(
+    (HERE / "results" / "experiment_3_calibration_metrics.json").write_text(
         json.dumps(results, indent=2, default=float))
     print(f"Wrote metrics JSON", flush=True)
 

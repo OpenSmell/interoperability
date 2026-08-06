@@ -35,8 +35,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "interoperability"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(INTEROP / "canonical_experiments"))
 
 from experiment_3_calibration import (
     concat_batches, load_all_batches, GAS_NAMES, MAG_IDX,
@@ -177,10 +180,10 @@ def run():
                        for m in ("mag", "full")},
         }
 
-    out = ROOT / "interoperability" / "experiment_4_coral_result.txt"
+    out = HERE / "results" / "experiment_4_coral_result.txt"
     out.write_text("\n".join(all_lines) + "\n")
     print(f"\nWrote {out}", flush=True)
-    (ROOT / "interoperability" / "experiment_4_coral_metrics.json").write_text(
+    (HERE / "results" / "experiment_4_coral_metrics.json").write_text(
         json.dumps(results, indent=2, default=float))
     print("Wrote metrics JSON", flush=True)
 

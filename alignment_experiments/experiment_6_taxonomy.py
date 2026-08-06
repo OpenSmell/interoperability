@@ -49,10 +49,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix, balanced_accuracy_score
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "interoperability" / "canonical_experiments"))
-sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT / "opensmell"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(INTEROP / "canonical_experiments"))
+sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / "opensmell"))
 
 from load_uci import load_all_batches, GAS_NAMES
 from experiment_3_calibration import (
@@ -179,9 +181,9 @@ def part_a():
 
 
 # ------------------------------------------------------------------ Part B ---
-TAX_DIR = ROOT / "research" / "taxonomy"
+TAX_DIR = REPO / "research" / "taxonomy"
 LABELS_CSV = TAX_DIR / "smellnet_osmo_labels.csv"
-SMELLNET_DIR = ROOT / "SmellNet" / "neurips-data-processed"
+SMELLNET_DIR = REPO / "SmellNet" / "neurips-data-processed"
 USER_RECS = Path.home() / "Osmograph_Recordings"
 SENSOR_COLS = ["NO2", "C2H5OH", "VOC", "CO", "Alcohol", "LPG"]
 R0 = 5
@@ -369,12 +371,12 @@ def main():
     b_lines, b_res = part_b()
 
     all_lines = a_lines + [""] + b_lines
-    out = ROOT / "interoperability" / "experiment_6_taxonomy_result.txt"
+    out = HERE / "results" / "experiment_6_taxonomy_result.txt"
     out.write_text("\n".join(all_lines) + "\n")
     print(f"\nWrote {out}", flush=True)
 
     metrics = {"part_a": a_res, "part_b": b_res}
-    (ROOT / "interoperability" / "experiment_6_taxonomy_metrics.json").write_text(
+    (HERE / "results" / "experiment_6_taxonomy_metrics.json").write_text(
         json.dumps(metrics, indent=2, default=float))
     print("Wrote metrics JSON", flush=True)
 

@@ -40,8 +40,11 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "interoperability"))
+HERE = Path(__file__).resolve().parent          # interoperability/alignment_experiments/
+INTEROP = HERE.parent                            # interoperability/
+REPO = INTEROP.parent                            # OpenSmell root
+sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(REPO / "opensmell"))
 
 from experiment_1_calibration import (
     LIVE, PER_CH_FEATS, MAGNITUDE_FEATS, feature_columns,
@@ -241,7 +244,7 @@ def run():
     L("With 2-3 anchors the map is underdetermined in the 8-9 dim complement;")
     L("held-out substances are off the anchor span. See experiment_5_analysis.md.")
 
-    out = ROOT / "interoperability" / "experiment_5_anchors_result.txt"
+    out = HERE / "results" / "experiment_5_anchors_result.txt"
     out.write_text("\n".join(lines) + "\n")
     print(f"\nWrote {out}", flush=True)
 
@@ -251,7 +254,7 @@ def run():
         "proc_scale_pooled": float(scale_all),
         "n_test_windows": {s: int(len(us_by[s])) for s in test_subs},
     }
-    (ROOT / "interoperability" / "experiment_5_anchors_metrics.json").write_text(
+    (HERE / "results" / "experiment_5_anchors_metrics.json").write_text(
         json.dumps(metrics, indent=2, default=float))
 
 

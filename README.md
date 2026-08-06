@@ -20,12 +20,12 @@ This repository validates the framework through seven experiments:
 
 ## Cross-Device Calibration / Alignment Arc (Exps 1-7)
 
-Beyond the seven canonical experiments above, a second numbered series in the
-repo root attacks the remaining cross-device transfer paths from the paper's
-interoperability agenda. Each is falsifiable, LOO-fair, and documented with an
-`*_analysis.md`. **Headline: every reference-free alignment is falsified; gains
-appear only when the target substance's own reference samples enter the fit
-(calibration data), confirming Theorem 2.**
+Beyond the seven canonical experiments above, a second numbered series in
+`alignment_experiments/` attacks the remaining cross-device transfer paths from
+the paper's interoperability agenda. Each is falsifiable, LOO-fair, and
+documented with an `*_analysis.md`. **Headline: every reference-free alignment
+is falsified; gains appear only when the target substance's own reference
+samples enter the fit (calibration data), confirming Theorem 2.**
 
 | # | Script | Venue | LOO-fair result |
 |---|--------|-------|-----------------|
@@ -37,10 +37,36 @@ appear only when the target substance's own reference samples enter the fit
 | 6 | `experiment_6_taxonomy.py` | UCI classes + SmellNet→OSMO | within-class error share below chance; user→Woody |
 | 7 | `experiment_7_chemoprint.py` | UCI sensor→chemoprint | within 99.6% → cross 2.4%/−5.0% |
 
-Run individually from the repo root with the repo venv, e.g.
-`python interoperability/experiment_4_coral.py`. Details in each
-`*_analysis.md`; all are folded into `private/OPENSMELL_MASTER.md` §8.3, §8.7,
-§10.10 and §9.4.
+Run individually from this repository with the project venv, e.g.
+`python ../venv/bin/python alignment_experiments/experiment_4_coral.py` (or run
+`run_alignment_experiments.py` from `alignment_experiments/` to run all seven).
+Every script resolves its own paths from its file location and writes
+`result.txt` + `metrics.json` into `alignment_experiments/results/`. Details in
+each `*_analysis.md`; all are folded into `private/OPENSMELL_MASTER.md` §8.3,
+§8.7, §10.10 and §9.4.
+
+## The sanctioned path: reference-point calibration
+
+Since every reference-free alignment above is falsified, the *only* sanctioned
+route to a concentration-reading instrument is per-rig reference-point
+calibration (`rr = R/R0 = a·C^b`, fitted in log-log space; invert as
+`C = (rr/a)^(1/b)`). It is implemented in the SDK
+(`opensmell/opensmell/calibration.py`), falsified numerically, and gated by the
+`HardwareInsufficiencyWarning` (`opensmell/opensmell/hardware.py`):
+
+| Item | Venue | Result |
+|---|---|---|
+| Method recovery under noise | `research/calibration-experiments/reference-point-calibration/experiment.py` | unbiased; σ=5%, 6 pts, 2 decades → LOOCV ≈7.1% median conc. error |
+| Data budget (points × noise) | same | σ=5% → 4 pts ≈9.5%; σ=10% → 4 pts ≈19% |
+| Real rig repeatability | user-rig session cache (`experiment_1_features_cache.npz`) | σ_session ≈ 12% ⇒ replicates required (4/point → σ≈5%) |
+| Extrapolation penalty | same | predicting 100 ppm from a 1–30 ppm fit is worse — never extrapolate |
+
+**Data gap (blocker for hardware validation):** no labeled-concentration
+recordings exist in-repo (UCI drift is ppm-unlabelled; the user rig has no
+reference source). The harness `run_calibration.py` is ready — feed it a CSV of
+exposures with a `ppm` column and it emits per-channel `(a, b)`, a LOOCV error
+budget, and a `sensor.calibration` manifest payload. See
+`research/calibration-experiments/reference-point-calibration/README.md`.
 
 ## Quick Start
 
@@ -71,18 +97,27 @@ python3 run_all.py
 
 ## Data Sources
 
-### SmellNet (Experiments 1, 2, 4, 5, 6)
+### SmellNet (canonical 1, 2; alignment 1, 2, 5, 6)
 - Automatically fetched from HuggingFace: `DeweiFeng/smell-net`
 - 50 food substances, 6 MOX sensors, multiple sessions
 - No manual setup required
+- Alignment experiments use a local mirror at `../SmellNet/neurips-data-processed/`
+  (also mirrored on HuggingFace); the user-rig session cache is
+  `alignment_experiments/experiment_1_features_cache.npz` (gitignored).
 
-### UCI Gas Sensor Array Drift (Experiment 3)
+### UCI Gas Sensor Array Drift (canonical 3; alignment 3, 4, 7)
 - Download from: https://archive.ics.uci.edu/ml/datasets/gas+sensor+array+drift+dataset
 - Extract to: `data/uci/gas+sensor+array+drift+dataset/Dataset/`
 - Should contain `batch1.dat` through `batch10.dat`
 - 6 pure gases, 16 MOX sensors, 10 batches over 36 months
 
-### OpenSmell User Device (Experiment 7)
+### UCI Dynamic / Turbulent Mixtures (alignment 3, 4)
+- Dynamic mixtures: https://archive.ics.uci.edu/dataset/322/gas+sensor+array+under+dynamic+gas+mixtures
+- Turbulent mixtures: https://archive.ics.uci.edu/dataset/309/gas+sensor+array+exposed+to+turbulent+gas+mixtures
+- Extract into `alignment_experiments/data/{dynamic,turbulent}-mixtures/`
+- 16 MOX sensors under varying concentration/gas-composition profiles; research-only license (validation, not product training)
+
+### OpenSmell User Device (alignment 1, 2, 5)
 - 3-sensor rig recordings from `~/Osmograph_Recordings/`
 - Substances: garlic, ginger, cinnamon, banana
 - Results are pre-computed and documented — no re-run needed
@@ -96,25 +131,31 @@ interoperability/
 │   ├── 02_leave_substance_out.py         # Experiment 2
 │   ├── 03_uci_drift.py                   # Experiment 3
 │   ├── 04_normalization_comparison.py    # Experiment 4
-│   ├── 05_ablation.py                    # Experiment 5 (NEW)
-│   ├── 06_baseline_comparison.py         # Experiment 6 (NEW)
-│   ├── 07_cross_device_sanity.py         # Experiment 7 (NEW)
+│   ├── 05_ablation.py                    # Experiment 5
+│   ├── 06_baseline_comparison.py         # Experiment 6
+│   ├── 07_cross_device_sanity.py         # Experiment 7
 │   ├── config.py                         # Configuration
 │   ├── load_data.py                      # SmellNet data loader
 │   ├── load_uci.py                       # UCI data loader
 │   ├── framework_features.py             # Feature extraction (145-dim)
-│   ├── run_all.py                        # Run all experiments
+│   ├── run_all.py                        # Run all canonical experiments
 │   ├── generate_figures.py               # Generate Figs 1-5
 │   ├── generate_tables.py                # Generate Tables 1-9
 │   ├── data/
 │   │   └── uci/                          # UCI dataset (user-provided)
-│   └── results/
-│       ├── metrics.json                  # All experiment results
-│       ├── ablation_results.csv          # Experiment 5 results
-│       ├── baseline_comparison.csv       # Experiment 6 results
-│       ├── cross_device_sanity.csv       # Experiment 7 results
-│       ├── figures/                      # Generated plots (1-5)
-│       └── tables/                       # Generated tables (1-9)
+│   └── results/                          # Canonical results/metrics
+└── alignment_experiments/
+    ├── experiment_1_calibration.py       # Session invariance of features
+    ├── experiment_2_synthetic_probe.py   # Synthetic gain/exponent/batch probe
+    ├── experiment_3_calibration.py       # UCI two-point (a,b) vs single-point M
+    ├── experiment_4_coral.py             # UCI CORAL covariance alignment
+    ├── experiment_5_anchors.py           # Real-rig 3-anchor affine/Procrustes
+    ├── experiment_6_taxonomy.py          # SmellNet→OSMO taxonomy transfer
+    ├── experiment_7_chemoprint.py        # UCI sensor→chemoprint regression
+    ├── run_alignment_experiments.py      # Run all 1-7 sequentially
+    ├── analyses/                         # *_analysis.md per experiment
+    ├── results/                          # *_result.txt + *_metrics.json
+    └── experiment_1_features_cache.npz   # User-rig session cache (gitignored)
 └── README.md                             # This file
 ```
 
