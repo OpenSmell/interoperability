@@ -1,21 +1,21 @@
-# Interoperability: Canonical Experiments for Digital Olfaction Framework
+# Digital Olfaction Framework: Canonical Experiments and Cross-Device Bounds
 
-This repository contains the canonical experiments validating the modular feature framework for interoperable digital olfaction, as described in the paper "Towards Interoperable Digital Olfaction: A Modular Feature Framework for Electronic Noses."
+This repository contains the canonical experiments for the modular feature framework for digital olfaction, as described in the paper "Towards Interoperable Digital Olfaction: A Modular Feature Framework for Electronic Noses": session-invariance on a single rig (the demonstrated result), the falsification of zero-shot cross-device transfer, and the reference-point calibration path — the only sanctioned route to a concentration-reading instrument.
 
 ## Overview
 
-The framework extracts device-agnostic features from MOX sensor time-series along five dimensions (device-agnostic, absolute, temporal, health, hardware). The key contribution is the mathematical proof that $R_s/R_0$ normalization cancels both $V_{cc}$ and $R_L$ completely, enabling theoretical cross-device interoperability.
+The framework extracts device-agnostic features from MOX sensor time-series along five dimensions (device-agnostic, absolute, temporal, health, hardware). The key contribution is the mathematical proof that $R_s/R_0$ normalization cancels both $V_{cc}$ and $R_L$ completely — which bounds what can and cannot transfer across devices: sensor constants $(a, b)$ do not cancel, so zero-shot transfer fails (Experiment 7) and calibration is per-rig.
 
 This repository validates the framework through seven experiments:
 
 | # | Experiment | Key Result |
 |---|-----------|------------|
-| 1 | **Session-Invariance** | 89.5% accuracy across held-out sessions (t=45.12, p<0.001) |
+| 1 | **Session-Invariance** | 88.5% accuracy across held-out sessions (t=60.78, p<0.001) |
 | 2 | **Leave-Substance-Out** | 67.4% consistency on novel substances (σ=7.6%) |
 | 3 | **UCI Drift Stability** | All feature subsets maintain separation ratio > 1.0 across 36 months |
 | 4 | **Normalization Comparison** | Framework features (67.3%) > raw voltages (63.3%) > R/R₀ alone (37.5%) |
 | 5 | **Ablation Study** | All feature subgroups contribute < 1% to accuracy — framework is highly redundant |
-| 6 | **Baseline Comparison** | Framework (89.5%) > 1D-CNN (81.78%) > raw voltages (63.3%) > ScentFormer (53.0%) > R/R₀ (37.5%) |
+| 6 | **Baseline Comparison** | Framework (88.5%) > 1D-CNN (81.78%) > raw voltages (63.3%) > ScentFormer (53.0%) > R/R₀ (37.5%) |
 | 7 | **Cross-Device Sanity** | Zero-shot transfer fails (10-18% vs 25% chance), consistent with Theorem 2 |
 
 ## Cross-Device Calibration / Alignment Arc (Exps 1-7)
@@ -167,6 +167,10 @@ interoperability/
 - t-statistic: ~60.78, p < 0.000001
 - Chance level: 2%
 
+> Note: the launch/headline session-invariance figure (81.78%, 44 food
+> substances, single device) comes from the contrastive 1D-CNN in Experiment 6
+> — the framework-feature RandomForest here reports 88.5% on all 50 substances.
+
 ### Experiment 2: Leave-Substance-Out
 - Mean consistency: 67.4% (σ=7.6%)
 - Per-fold: ~53-75%
@@ -200,7 +204,7 @@ Selectivity ratios (cross-channel relative amplitude comparisons) carry the most
 ### Experiment 6: Baseline Comparison
 | Rank | Method | Accuracy |
 |------|--------|----------|
-| 1 | Framework features (ours, 145-dim) | 89.5% |
+| 1 | Framework features (ours, 145-dim) | 88.5% |
 | 2 | Contrastive 1D-CNN (ours) | 81.78% |
 | 3 | Raw voltages + RandomForest | 63.3% |
 | 4 | ScentFormer (Transformer) | 53.0% |
