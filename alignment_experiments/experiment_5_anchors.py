@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Experiment 5 — Anchor-based (supervised) alignment on the user rig.
+"""Experiment 5 — Anchor-based (supervised) alignment on Praise James' rig.
 
 Phase 4 (Qwen brief, Path B): instead of an *unsupervised* alignment (Exp 4
 CORAL), fit a SUPERVISED map using the 3 shared substances as anchors —
-cinnamon, garlic, banana are measured on BOTH SmellNet (Rig A) and the user
-rig (Rig B). Then test transfer on a held-out anchor substance
-(leave-one-anchor-out) and on lime (user-only OOV probe).
+cinnamon, garlic, banana are measured on BOTH SmellNet (Rig A) and Praise
+James' rig (Rig B). Then test transfer on a held-out anchor substance
+(leave-one-anchor-out) and on lime (Praise James-only OOV probe).
 
-Venue: the real SmellNet -> user pair, magnitude subspace only (3 live
-channels VOC/Alcohol/LPG x 3 magnitude features = 9 dims), matching the
-Exp 1/2/3 magnitude-isolation convention.
+Venue: the real SmellNet -> Praise James' pair, magnitude subspace only
+(3 live channels VOC/Alcohol/LPG x 3 magnitude features = 9 dims), matching
+the Exp 1/2/3 magnitude-isolation convention.
 
 Two map families (the honest comparison to Exp 1's single scalar M and
 Exp 4's covariance map):
@@ -117,7 +117,7 @@ def run():
     L = lambda s="": lines.append(s) or print(s, flush=True)
 
     L("=" * 72)
-    L("EXPERIMENT 5 — ANCHOR-BASED SUPERVISED ALIGNMENT (user rig)")
+    L("EXPERIMENT 5 — ANCHOR-BASED SUPERVISED ALIGNMENT (Praise James' rig)")
     L("=" * 72)
     L(f"Chance = 25% (4 SmellNet classes) | magnitude subspace = {len(MAG9)} dims")
     L(f"Anchors (shared substances): {OVERLAP} | OOV probe: lime")

@@ -2,18 +2,18 @@
 """Experiment 1 — deciding cross-device calibration test (canonical 187-dim).
 
 Train a RandomForest on SmellNet (Rig A gold standard) restricted to the three
-live channels shared with the user rig (VOC, Alcohol, LPG = canonical ch 2, 4,
-5). Test on the user's real 3-sensor recordings (V2 format).
+live channels shared with Praise James' rig (VOC, Alcohol, LPG = canonical
+ch 2, 4, 5). Test on Praise James' real 3-sensor recordings (V2 format).
 
 Two test conditions:
-  RAW     — user features via the canonical extractor, no alignment.
-  ALIGNED — user magnitude features (relative_amplitude, auc, endpoint_delta)
+  RAW     — Praise James' features via the canonical extractor, no alignment.
+  ALIGNED — magnitude features (relative_amplitude, auc, endpoint_delta)
             rescaled per live channel by M_ch. M_ch is the median ratio
-            SmellNet/user relative_amplitude measured on reference substance(s)
-            present in BOTH datasets.
+            SmellNet/Praise James' relative_amplitude measured on reference
+            substance(s) present in BOTH datasets.
 
 Reference substances present in both datasets: cinnamon, garlic, banana.
-"lime" is user-only (SmellNet ships "lemon", not lime), so lime is an
+"lime" is Praise James-only (SmellNet ships "lemon", not lime), so lime is an
 out-of-vocabulary probe and never participates in fitting M.
 
 Leave-one-out reference discipline: evaluating substance t fits M from the
@@ -25,7 +25,7 @@ External baseline (documented, 30-dim paradigm, research/interoperability_
 proof.txt): garlic 100%, ginger 0%, cinnamon 0%, overall 33.3% (4-class,
 chance 25%).
 
-Run:  python interoperability/experiment_1_calibration.py
+Run:  python alignment_experiments/experiment_1_calibration.py
 """
 
 import sys
@@ -51,7 +51,7 @@ USER_RECS = Path.home() / "Osmograph_Recordings"
 CACHE_PATH = HERE / "experiment_1_features_cache.npz"
 
 SENSOR_NAMES = ["NO2", "C2H5OH", "VOC", "CO", "Alcohol", "LPG"]
-LIVE = [2, 4, 5]  # VOC, Alcohol, LPG — the populated channels on the user rig
+LIVE = [2, 4, 5]  # VOC, Alcohol, LPG — the populated channels on Praise James' rig
 
 # SmellNet training classes. ginger is train-only (user has no V2 ginger);
 # lime is user-only and handled as an OOD probe.

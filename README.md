@@ -1,10 +1,10 @@
 # Digital Olfaction Framework: Canonical Experiments and Cross-Device Bounds
 
-This repository contains the canonical experiments for the modular feature framework for digital olfaction, as described in the paper "Towards Interoperable Digital Olfaction: A Modular Feature Framework for Electronic Noses": session-invariance on a single rig (the demonstrated result), the falsification of zero-shot cross-device transfer, and the reference-point calibration path — the only sanctioned route to a concentration-reading instrument.
+This repository contains the canonical experiments for the modular feature framework for digital olfaction, as described in the paper "Towards Interoperable Digital Olfaction: A Modular Feature Framework for Electronic Noses": session-invariance on a single rig (the demonstrated result), the failure of zero-shot cross-device transfer, and the reference-point calibration path to a concentration-reading instrument.
 
 ## Overview
 
-The framework extracts device-agnostic features from MOX sensor time-series along five dimensions (device-agnostic, absolute, temporal, health, hardware). The key contribution is the mathematical proof that $R_s/R_0$ normalization cancels both $V_{cc}$ and $R_L$ completely — which bounds what can and cannot transfer across devices: sensor constants $(a, b)$ do not cancel, so zero-shot transfer fails (Experiment 7) and calibration is per-rig.
+The framework extracts device-agnostic features from MOX sensor time-series along five dimensions (device-agnostic, absolute, temporal, health, hardware). The key contribution is the proof that $R_s/R_0$ normalization cancels both $V_{cc}$ and $R_L$ completely — which bounds what can and cannot transfer across devices: sensor constants $(a, b)$ do not cancel, so zero-shot transfer fails (Experiment 7) and calibration is per-rig.
 
 This repository validates the framework through seven experiments:
 
@@ -16,25 +16,26 @@ This repository validates the framework through seven experiments:
 | 4 | **Normalization Comparison** | Framework features (67.3%) > raw voltages (63.3%) > R/R₀ alone (37.5%) |
 | 5 | **Ablation Study** | All feature subgroups contribute < 1% to accuracy — framework is highly redundant |
 | 6 | **Baseline Comparison** | Framework (88.5%) > 1D-CNN (81.78%) > raw voltages (63.3%) > ScentFormer (53.0%) > R/R₀ (37.5%) |
-| 7 | **Cross-Device Sanity** | Zero-shot transfer fails (10-18% vs 25% chance), consistent with Theorem 2 |
+| 7 | **Cross-Device Sanity** | Zero-shot transfer fails (10-18% vs 25% chance; best single channel 40.7% borderline), consistent with Theorem 2 |
 
 ## Cross-Device Calibration / Alignment Arc (Exps 1-7)
 
 Beyond the seven canonical experiments above, a second numbered series in
 `alignment_experiments/` attacks the remaining cross-device transfer paths from
 the paper's interoperability agenda. Each is falsifiable, LOO-fair, and
-documented with an `*_analysis.md`. **Headline: every reference-free alignment
-is falsified; gains appear only when the target substance's own reference
-samples enter the fit (calibration data), confirming Theorem 2.**
+documented with an `*_analysis.md`. Every reference-free alignment is at or
+near chance; gains appear only when the target substance's own reference
+samples enter the fit (calibration data), consistent with the framework's
+per-rig calibration bound.
 
 | # | Script | Venue | LOO-fair result |
 |---|--------|-------|-----------------|
-| 1 | `experiment_1_calibration.py` | real SmellNet→user, single-point M | +0.0 pp |
+| 1 | `experiment_1_calibration.py` | SmellNet → Praise James' rig, single-point M | +0.0 pp |
 | 2 | `experiment_2_synthetic_probe.py` | synthetic gain/exponent/batch | M sound for gain only |
 | 3 | `experiment_3_calibration.py` | UCI two-point (a,b) vs M | mag ≤ +0.4 pp, full +0.0 |
-| 4 | `experiment_4_coral.py` | UCI CORAL covariance map | coral_ref mixed; coral_all +5–8 pp (transductive) |
-| 5 | `experiment_5_anchors.py` | real rig, 3-anchor affine/Procrustes | +0.0 pp |
-| 6 | `experiment_6_taxonomy.py` | UCI classes + SmellNet→OSMO | within-class error share below chance; user→Woody |
+| 4 | `experiment_4_coral.py` | UCI CORAL covariance map | coral_ref ≤ +2.8 pp LOO-fair; coral_all +3.3–7.3 pp (test-gas samples in fit) |
+| 5 | `experiment_5_anchors.py` | Praise James' rig, 3-anchor affine/Procrustes | +0.0 pp |
+| 6 | `experiment_6_taxonomy.py` | UCI classes + SmellNet→OSMO | within-class error share below chance; rig→Woody |
 | 7 | `experiment_7_chemoprint.py` | UCI sensor→chemoprint | within 99.6% → cross 2.4%/−5.0% |
 
 Run individually from this repository with the project venv, e.g.
@@ -45,10 +46,10 @@ Every script resolves its own paths from its file location and writes
 each `*_analysis.md`; all are folded into `private/OPENSMELL_MASTER.md` §8.3,
 §8.7, §10.10 and §9.4.
 
-## The sanctioned path: reference-point calibration
+## The reference-point calibration path
 
-Since every reference-free alignment above is falsified, the *only* sanctioned
-route to a concentration-reading instrument is per-rig reference-point
+Since every reference-free alignment above is at or near chance, the route to
+a concentration-reading instrument is per-rig reference-point
 calibration (`rr = R/R0 = a·C^b`, fitted in log-log space; invert as
 `C = (rr/a)^(1/b)`). It is implemented in the SDK
 (`opensmell/opensmell/calibration.py`), falsified numerically, and gated by the
@@ -58,12 +59,14 @@ calibration (`rr = R/R0 = a·C^b`, fitted in log-log space; invert as
 |---|---|---|
 | Method recovery under noise | `research/calibration-experiments/reference-point-calibration/experiment.py` | unbiased; σ=5%, 6 pts, 2 decades → LOOCV ≈7.1% median conc. error |
 | Data budget (points × noise) | same | σ=5% → 4 pts ≈9.5%; σ=10% → 4 pts ≈19% |
-| Real rig repeatability | user-rig session cache (`experiment_1_features_cache.npz`) | σ_session ≈ 12% ⇒ replicates required (4/point → σ≈5%) |
+| Real rig repeatability | Praise James' rig session cache (`experiment_1_features_cache.npz`) | σ_session ≈ 12% ⇒ replicates required (4/point → σ≈5%) |
 | Extrapolation penalty | same | predicting 100 ppm from a 1–30 ppm fit is worse — never extrapolate |
 
 **Data gap (blocker for hardware validation):** no labeled-concentration
-recordings exist in-repo (UCI drift is ppm-unlabelled; the user rig has no
-reference source). The harness `run_calibration.py` is ready — feed it a CSV of
+recordings exist in-repo. UCI drift is ppm-unlabelled, and Praise James' rig
+has *category* reference substances (garlic, cinnamon, banana — used for
+alignment anchors) but no calibrated concentration source. The harness
+`run_calibration.py` is ready — feed it a CSV of
 exposures with a `ppm` column and it emits per-channel `(a, b)`, a LOOCV error
 budget, and a `sensor.calibration` manifest payload. See
 `research/calibration-experiments/reference-point-calibration/README.md`.
@@ -80,7 +83,7 @@ pip install numpy scipy scikit-learn pandas matplotlib
 
 # Download UCI dataset (required for Experiment 3)
 # Download from: https://archive.ics.uci.edu/ml/datasets/gas+sensor+array+drift+dataset
-# Place in: data/uci/gas+sensor+array+drift+dataset/Dataset/
+# Place in: canonical_experiments/data/uci/gas+sensor+array+drift+dataset/Dataset/
 
 # Run all experiments
 python3 run_all.py
@@ -100,10 +103,17 @@ python3 run_all.py
 ### SmellNet (canonical 1, 2; alignment 1, 2, 5, 6)
 - Automatically fetched from HuggingFace: `DeweiFeng/smell-net`
 - 50 food substances, 6 MOX sensors, multiple sessions
+- Citation: Feng, D., Dai, W., Li, C., Pernigo, A., Wen, Y. & Liang, P. P.
+  "SmellNet: A Large-scale Dataset for Real-world Smell Recognition."
+  arXiv:2506.00239 (2025); ICLR 2026.
 - No manual setup required
 - Alignment experiments use a local mirror at `../SmellNet/neurips-data-processed/`
-  (also mirrored on HuggingFace); the user-rig session cache is
+  (also mirrored on HuggingFace); the Praise James' rig session cache is
   `alignment_experiments/experiment_1_features_cache.npz` (gitignored).
+
+### OSMO taxonomy (alignment 6)
+- Osmo Labs, PBC. "The Osmo Scent Taxonomy," v1.1 (2025):
+  <https://github.com/osmoai/taxonomy>
 
 ### UCI Gas Sensor Array Drift (canonical 3; alignment 3, 4, 7)
 - Download from: https://archive.ics.uci.edu/ml/datasets/gas+sensor+array+drift+dataset
@@ -117,7 +127,7 @@ python3 run_all.py
 - Extract into `alignment_experiments/data/{dynamic,turbulent}-mixtures/`
 - 16 MOX sensors under varying concentration/gas-composition profiles; research-only license (validation, not product training)
 
-### OpenSmell User Device (alignment 1, 2, 5)
+### Praise James' rig (alignment 1, 2, 5)
 - 3-sensor rig recordings from `~/Osmograph_Recordings/`
 - Substances: garlic, ginger, cinnamon, banana
 - Results are pre-computed and documented — no re-run needed
@@ -155,7 +165,7 @@ interoperability/
     ├── run_alignment_experiments.py      # Run all 1-7 sequentially
     ├── analyses/                         # *_analysis.md per experiment
     ├── results/                          # *_result.txt + *_metrics.json
-    └── experiment_1_features_cache.npz   # User-rig session cache (gitignored)
+    └── experiment_1_features_cache.npz   # Praise James' rig session cache (gitignored)
 └── README.md                             # This file
 ```
 
@@ -219,15 +229,21 @@ Selectivity ratios (cross-channel relative amplitude comparisons) carry the most
 | MQ-135 VOC only | 40.7% | 25% | borderline |
 | MQ-3 only | 6.8% | 25% | n.s. |
 
-These informal tests between a 3-sensor OpenSmell device and 6-sensor SmellNet device are consistent with Theorem 2: different MQ sensor models (different a,b constants) produce incompatible feature distributions even after R/R₀ normalization.
+These informal tests between a 3-sensor OpenSmell rig (Praise James' rig) and 6-sensor SmellNet device are consistent with Theorem 2: different MQ sensor models (different a,b constants) produce incompatible feature distributions even after R/R₀ normalization.
 
 ## Feature Extraction
 
-The framework extracts 145 features per recording (6 sensors):
-- 6 per-channel device-agnostic features × 6 channels = 36
+The canonical experiments extractor produces 145 features per 6-sensor
+recording:
+- 21 per-channel features (6 device-agnostic + 4 absolute + 4 temporal + 4
+  health + 3 hardware) × 6 channels = 126
 - 15 cross-channel selectivity ratios
 - 4 global features
-- Additional derived features (absolute, temporal, health, hardware)
+
+The current SDK (`opensmell`) adds 7 more per channel (1 saturation index +
+6 decay constants), giving 187 features on 6 channels and 91 on the 3-channel
+rig. This repository's canonical experiments use the 145-dim extractor in
+`canonical_experiments/framework_features.py`.
 
 Key features include:
 - Relative amplitude (ΔR/R₀)
@@ -255,7 +271,7 @@ python3 07_cross_device_sanity.py
 
 ## Paper
 
-The full paper is available on arXiv: [link to be added after submission]
+The full paper will be linked here once published on arXiv.
 
 ## Citation
 
@@ -275,7 +291,7 @@ Open-source under MIT License. See LICENSE file for details.
 ## Contact
 
 - GitHub: https://github.com/opensmell
-- Email: praisejx@protonme
+- Email: praisejx@proton.me
 
 ## Contributing
 

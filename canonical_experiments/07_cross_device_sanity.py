@@ -1,9 +1,9 @@
 """Experiment 7: Cross-Device Sanity Check (Zero-Shot)
 
 Documents the existing cross-device zero-shot results from the research/
-directory.  These are informal tests between a 3-sensor OpenSmell user
-device and the 6-sensor SmellNet device, with uncontrolled substance
-matching and no standard enclosure protocol.
+directory.  These are informal tests between a 3-sensor OpenSmell rig
+(Praise James' rig) and the 6-sensor SmellNet device, with uncontrolled
+substance matching and no standard enclosure protocol.
 
 The result is consistent with Theorem 2: even with Rs/R₀ normalization,
 different MQ sensor models (different a,b constants) produce incompatible
@@ -84,7 +84,7 @@ def run():
     print("=" * 70)
     print("""
   These results document our informal cross-device zero-shot tests
-  between a 3-sensor OpenSmell user device and the 6-sensor SmellNet
+  between a 3-sensor OpenSmell rig (Praise James' rig) and the 6-sensor SmellNet
   device.  They are NOT controlled experiments: substances were
   recorded at different times, with different concentrations, without
   a shared enclosure.  The results are consistent with Theorem 2:

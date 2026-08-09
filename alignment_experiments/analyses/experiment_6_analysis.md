@@ -19,7 +19,7 @@ venues with different class systems:
   make coarsening a genuine transfer mechanism).
 - **Part B — SmellNet/OSMO:** do 30-dim paradigm features (device-agnostic by
   R0 normalization) support OSMO grand-family prediction, and does a family
-  classifier trained on SmellNet transfer to the user rig?
+  classifier trained on SmellNet transfer to Praise James' rig?
 
 ## Part A — UCI chemical-class coarsening
 
@@ -79,8 +79,8 @@ leave-one-substance-out for grand-family prediction (chance 12.5%, 8 families).
   device-agnostic paradigm set is a coarse-category representation by
   construction; it trades fine discrimination for exactly the structure a
   taxonomy needs.
-- **Cross-device (SmellNet-trained → user rig): every user recording maps to
-  Woody.** Cinnamon and ginger are true Woody (correct by dominance); garlic
+- **Cross-device (SmellNet-trained → Praise James' rig): every recording maps
+  to Woody.** Cinnamon and ginger are true Woody (correct by dominance); garlic
   (Mineral), banana (Fruity), lemon (Citrus) all MISMATCH; unlabeled
   room_air/onion/mosquito_coil also → Woody. Decisive negative: the family
   structure that is learnable within SmellNet does not survive the device
@@ -99,9 +99,9 @@ leave-one-substance-out for grand-family prediction (chance 12.5%, 8 families).
   — device-agnostic *category* features — and explains why the paradigm-based
   external baseline (33.3%) beat the canonical full model (8.3%) in Exp 1:
   coarse structure is all the paradigm set is built to carry.
-- **Why the user-rig transfer fails:** (a) the user rig has 3 live channels
-  (CO/NO2/C2H5OH are exactly 0.0), so half the paradigm dimensions are
-  degenerate for every user vector; (b) sr ≈ 2.1 Hz vs 10 Hz (kinetic
+- **Why the cross-device transfer fails:** (a) Praise James' rig has 3 live
+  channels (CO/NO2/C2H5OH are exactly 0.0), so half the paradigm dimensions
+  are degenerate for every rig vector; (b) sr ≈ 2.1 Hz vs 10 Hz (kinetic
   paradigm terms not comparable); (c) Woody dominance + a shifted manifold
   sends everything to the majority class. Same structural causes as Exp 1's
   collapse-to-banana.
@@ -123,8 +123,8 @@ leave-one-substance-out for grand-family prediction (chance 12.5%, 8 families).
 - Part B substance LSO at 0.0% (n=6 recordings per substance, 30-dim features,
   RF) is a strong but small-sample result; a different estimator might find
   weak substance signal.
-- User-rig leg is confounded by the 3-live-channel/6-channel mismatch and
-  sr mismatch — the collapse to Woody cannot be attributed to drift alone.
+- Praise James' rig leg is confounded by the 3-live-channel/6-channel mismatch
+  and sr mismatch — the collapse to Woody cannot be attributed to drift alone.
 - Exp 6 fine cross numbers are pooled-over-B (overall accuracy), which differ
   by ±1–3 pp from Exp 3's LOO-mean RAW (36.5/38.3 vs 37.8/38.8 primary) — the
   two quantities are the same quantity evaluated differently; comparisons

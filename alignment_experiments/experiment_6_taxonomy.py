@@ -32,8 +32,8 @@ Part B — SmellNet paradigms (30-dim, device-agnostic by R0 normalization) to
   - LSO classifier: per-recording paradigm vectors -> grand family, leave-one-
     substance-out. Chance = 1/8 = 12.5%.
   - Substance-level LSO (50 classes, chance 2%) for reference.
-  - Cross-device: fit family RF on SmellNet paradigms, predict the USER rig's
-    paradigm vectors, score against OSMO ground truth for labeled substances
+  - Cross-device: fit family RF on SmellNet paradigms, predict Praise James'
+    rig's paradigm vectors, score against OSMO ground truth for labeled substances
     (garlic->Mineral, cinnamon->Woody, banana->Fruity, lemon->Citrus, ginger->Woody).
 
 Run:  python interoperability/experiment_6_taxonomy.py
@@ -302,8 +302,8 @@ def part_b():
     for i, f in enumerate(fam_list):
         L(f"  {f[:9]:>10}" + "".join(f"{v:>10d}" for v in cm[i]))
 
-    # cross-device: predict user rig paradigms
-    L("\n--- Cross-device: SmellNet-trained family RF -> USER rig paradigms ---")
+    # cross-device: predict Praise James' rig paradigms
+    L("\n--- Cross-device: SmellNet-trained family RF -> Praise James' rig paradigms ---")
     rf_all = RandomForestClassifier(n_estimators=N_ESTIMATORS, random_state=RANDOM_STATE,
                                     class_weight="balanced", n_jobs=-1).fit(Xs, y_fam)
     user_rec = []
@@ -357,7 +357,7 @@ def part_b():
             dist = "  ".join(f"{k}:{v}" for k, v in per_sub[s].most_common(3))
             L(f"  {s:14s} OSMO={gt:9s} predicted={top:9s} [{ok}]  {dist}")
     else:
-        L("  No user recordings found.")
+        L("  No rig recordings found.")
 
     return lines, {"family_lso_accuracy": float(acc_fam),
                    "family_lso_balanced": float(bal_fam),

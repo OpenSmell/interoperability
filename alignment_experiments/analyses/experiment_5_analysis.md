@@ -1,4 +1,4 @@
-# Experiment 5 — Anchor-based supervised alignment on the user rig
+# Experiment 5 — Anchor-based supervised alignment on Praise James' rig
 
 **Status:** COMPLETE.
 **Date:** 2026-08-05
@@ -9,12 +9,12 @@
 
 Exps 1–4 assumed alignment without knowing which substances a reference pair
 measured. Here we give the alignment **real supervised anchors**: cinnamon,
-garlic and banana are recorded on *both* SmellNet (Rig A) and the user rig
-(Rig B), so we know the anchor-pair correspondence exactly. Can a supervised
+garlic and banana are recorded on *both* SmellNet (Rig A) and Praise James'
+rig (Rig B), so we know the anchor-pair correspondence exactly. Can a supervised
 map fitted on those anchors transfer a *held-out* substance — the one case the
 impossibility theorem allows if reference substances exist?
 
-Venue: real SmellNet→user pair, magnitude subspace only (3 live channels
+Venue: real SmellNet→Praise James' pair, magnitude subspace only (3 live channels
 VOC/Alcohol/LPG × 3 magnitude features = 9 dims), reusing the Exp 1 feature
 cache. Chance = 25% (4 SmellNet classes).
 

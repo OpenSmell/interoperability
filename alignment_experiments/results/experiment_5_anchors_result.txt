@@ -1,5 +1,5 @@
 ========================================================================
-EXPERIMENT 5 — ANCHOR-BASED SUPERVISED ALIGNMENT (user rig)
+EXPERIMENT 5 — ANCHOR-BASED SUPERVISED ALIGNMENT (Praise James' rig)
 ========================================================================
 Chance = 25% (4 SmellNet classes) | magnitude subspace = 9 dims
 Anchors (shared substances): ['cinnamon', 'garlic', 'banana'] | OOV probe: lime

@@ -41,7 +41,7 @@ Family confusion (rows=true):
      Soulful         0         0         3         8         0         0         0         1
        Woody        10         2         6         9        15         0         1        71
 
---- Cross-device: SmellNet-trained family RF -> USER rig paradigms ---
+--- Cross-device: SmellNet-trained family RF -> Praise James' rig paradigms ---
   banana         OSMO=Fruity    predicted=Woody     [MISMATCH]  Woody:1
   cinnamon       OSMO=Woody     predicted=Woody     [OK]  Woody:1
   garlic         OSMO=Mineral   predicted=Woody     [MISMATCH]  Woody:5

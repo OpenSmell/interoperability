@@ -97,7 +97,7 @@ Pooled (optimistic): mag RAW 44.5% → coral_all 52.0% (+7.5 pp); full RAW 51.3%
   solution.** The best LOO-fair number is full coral_ref at +2.8 pp; everything
   larger relies on `coral_all`, which requires the target device's samples for
   the test gas itself. But if target-gas target-device samples are available,
-  that is **calibration data, not zero-shot** — and the user's impossibility
+  that is **calibration data, not zero-shot** — and the impossibility
   result (§8.3, §8.7) says cross-device transfer without such data is
   mathematically ruled out by the unmixed (a, b) sensor constants.
 - **The coral_ref→coral_all gap is the paper's number.** It quantifies exactly
