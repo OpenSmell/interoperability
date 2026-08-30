@@ -43,8 +43,7 @@ Run individually from this repository with the project venv, e.g.
 `run_alignment_experiments.py` from `alignment_experiments/` to run all seven).
 Every script resolves its own paths from its file location and writes
 `result.txt` + `metrics.json` into `alignment_experiments/results/`. Details in
-each `*_analysis.md`; all are folded into `private/OPENSMELL_MASTER.md` §8.3,
-§8.7, §10.10 and §9.4.
+each `*_analysis.md`;
 
 ## The reference-point calibration path
 
@@ -61,15 +60,6 @@ calibration (`rr = R/R0 = a·C^b`, fitted in log-log space; invert as
 | Data budget (points × noise) | same | σ=5% → 4 pts ≈9.5%; σ=10% → 4 pts ≈19% |
 | Real rig repeatability | Praise James' rig session cache (`experiment_1_features_cache.npz`) | σ_session ≈ 12% ⇒ replicates required (4/point → σ≈5%) |
 | Extrapolation penalty | same | predicting 100 ppm from a 1–30 ppm fit is worse — never extrapolate |
-
-**Data gap (blocker for hardware validation):** no labeled-concentration
-recordings exist in-repo. UCI drift is ppm-unlabelled, and Praise James' rig
-has *category* reference substances (garlic, cinnamon, banana — used for
-alignment anchors) but no calibrated concentration source. The harness
-`run_calibration.py` is ready — feed it a CSV of
-exposures with a `ppm` column and it emits per-channel `(a, b)`, a LOOCV error
-budget, and a `sensor.calibration` manifest payload. See
-`research/calibration-experiments/reference-point-calibration/README.md`.
 
 ## Quick Start
 
@@ -177,10 +167,6 @@ interoperability/
 - t-statistic: ~60.78, p < 0.000001
 - Chance level: 2%
 
-> Note: the launch/headline session-invariance figure (81.78%, 44 food
-> substances, single device) comes from the contrastive 1D-CNN in Experiment 6
-> — the framework-feature RandomForest here reports 88.5% on all 50 substances.
-
 ### Experiment 2: Leave-Substance-Out
 - Mean consistency: 67.4% (σ=7.6%)
 - Per-fold: ~53-75%
@@ -210,6 +196,8 @@ Tests which subgroups of the 55 device-agnostic features matter most.
 | Integral/Endpoint | 66.1% | +0.2% |
 
 Selectivity ratios (cross-channel relative amplitude comparisons) carry the most discriminative power. Per-channel features (amplitude, kinetics, integral) are individually replaceable due to correlation.
+
+Note: The ablation study was conducted on SmellNet data, which lacks explicit baseline-exposure-recovery phases. Consequently, kinetics features (rise/decay time) are unreliable or zero in this dataset. The contribution of kinetics features may be higher when tested with data collected using the standardized Osmograph protocol. A follow-up ablation study on Osmograph-collected data is planned.
 
 ### Experiment 6: Baseline Comparison
 | Rank | Method | Accuracy |
@@ -275,14 +263,7 @@ The full paper will be linked here once published on arXiv.
 
 ## Citation
 
-```bibtex
-@article{james2026interoperable,
-  title={Towards Interoperable Digital Olfaction: A Modular Feature Framework for Electronic Noses},
-  author={James, Praise},
-  year={2026},
-  journal={arXiv preprint}
-}
-```
+James, P. (2026). Towards Interoperable Digital Olfaction: A Modular Feature Framework for Metal‑Oxide Semiconductor Electronic Noses. Zenodo. https://doi.org/10.5281/zenodo.21243013
 
 ## License
 
@@ -291,14 +272,37 @@ Open-source under MIT License. See LICENSE file for details.
 ## Contact
 
 - GitHub: https://github.com/opensmell
-- Email: praisejx@proton.me
 
 ## Contributing
 
-We welcome contributions, especially:
-- Cross-device validation experiments
-- Additional sensor modalities
-- Bug fixes and improvements
-- Documentation enhancements
+We welcome contributions that help close the gaps between the framework and real-world deployment. Priority areas include:
 
-Please open an issue or pull request on GitHub.
+**High Priority (Directly addresses blockers in the README):**
+
+    Labelled concentration data — The reference-point calibration path is ready (run_calibration.py) but lacks a dataset with known ppm values. If you have access to controlled gas mixtures or can record sensor responses to known concentrations, your data would unlock empirical validation of the two-point calibration method.
+
+    Cross-device validation experiments — The zero-shot transfer failure is proven theoretically and observed informally (Experiment 7). We need controlled experiments with two devices, known substances, and matched concentrations to empirically validate the two-point calibration approach described in the paper.
+
+**Medium Priority (Extends the framework's utility):**
+
+    Additional sensor modalities — The framework is modular and sensor-agnostic. Contributions for electrochemical, optical, or MEMS sensors are welcome, especially if you can provide the equivalent of the device-agnostic normalization for your modality.
+
+    Temporal feature validation — The ablation study's kinetics features (rise/decay time) were limited by SmellNet's lack of explicit baseline-exposure-recovery phases. If you collect data using the standardized protocol (see PROTOCOL.md), we can retest the ablation and validate whether kinetics features become more discriminative.
+
+**General (Always welcome):**
+
+    Bug fixes and improvements — Open an issue before submitting a PR to discuss the fix.
+
+    Documentation enhancements — Clarity, examples, quickstart guides, and translations.
+
+**How to contribute:**
+
+    Open an issue describing what you'd like to work on.
+
+    Fork the repository and create a branch for your work.
+
+    Submit a pull request with a clear description of the changes.
+
+    Ensure experiments remain reproducible (fixed random seeds, documented data sources).
+
+Data contribution: If you have sensor data, please see data-commons/ for the contribution pipeline. For labelled concentration data, contact us directly to coordinate calibration experiments.
