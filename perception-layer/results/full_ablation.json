@@ -1,0 +1,1994 @@
+{
+  "experiment": "full_187_feature_ablation",
+  "n_features_total": 187,
+  "groups": {
+    "Absolute": {
+      "n_features_removed": 24,
+      "mean_accuracy": 0.9375,
+      "delta_from_baseline": -0.03125,
+      "t_statistic": 13.0,
+      "p_value": 0.048874503944394805,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "Advanced_Decay": {
+      "n_features_removed": 42,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": true,
+      "verdict_valid_on_this_data": false
+    },
+    "Advanced_SaturationIndex": {
+      "n_features_removed": 6,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "DeviceAgnostic_Amplitude": {
+      "n_features_removed": 12,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "DeviceAgnostic_IntegralEndpoint": {
+      "n_features_removed": 12,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "DeviceAgnostic_Kinetics": {
+      "n_features_removed": 12,
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0,
+      "t_statistic": 27.0,
+      "p_value": 0.023567737740682822,
+      "protocol_dependent": true,
+      "verdict_valid_on_this_data": false
+    },
+    "Global": {
+      "n_features_removed": 4,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "Hardware": {
+      "n_features_removed": 18,
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0,
+      "t_statistic": 27.0,
+      "p_value": 0.023567737740682822,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "Health": {
+      "n_features_removed": 24,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": true,
+      "verdict_valid_on_this_data": false
+    },
+    "SelectivityRatios": {
+      "n_features_removed": 15,
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125,
+      "t_statistic": Infinity,
+      "p_value": 0.0,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    },
+    "Temporal": {
+      "n_features_removed": 24,
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0,
+      "t_statistic": 27.0,
+      "p_value": 0.023567737740682822,
+      "protocol_dependent": false,
+      "verdict_valid_on_this_data": true
+    }
+  },
+  "flagged_candidates": {
+    "voltage": {
+      "features": [
+        "ch0_abs_voltage",
+        "ch1_abs_voltage",
+        "ch2_abs_voltage",
+        "ch3_abs_voltage",
+        "ch4_abs_voltage",
+        "ch5_abs_voltage"
+      ],
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125
+    },
+    "circuit_response": {
+      "features": [
+        "ch0_hw_circuit_response",
+        "ch1_hw_circuit_response",
+        "ch2_hw_circuit_response",
+        "ch3_hw_circuit_response",
+        "ch4_hw_circuit_response",
+        "ch5_hw_circuit_response"
+      ],
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125
+    },
+    "thermal_profile": {
+      "features": [
+        "ch0_hw_thermal_profile",
+        "ch1_hw_thermal_profile",
+        "ch2_hw_thermal_profile",
+        "ch3_hw_thermal_profile",
+        "ch4_hw_thermal_profile",
+        "ch5_hw_thermal_profile"
+      ],
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0
+    },
+    "sensitivity_decay": {
+      "features": [
+        "ch0_health_sensitivity_decay",
+        "ch1_health_sensitivity_decay",
+        "ch2_health_sensitivity_decay",
+        "ch3_health_sensitivity_decay",
+        "ch4_health_sensitivity_decay",
+        "ch5_health_sensitivity_decay"
+      ],
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0
+    },
+    "oscillation": {
+      "features": [
+        "ch0_temp_oscillation_freq",
+        "ch0_temp_oscillation_amp",
+        "ch1_temp_oscillation_freq",
+        "ch1_temp_oscillation_amp",
+        "ch2_temp_oscillation_freq",
+        "ch2_temp_oscillation_amp",
+        "ch3_temp_oscillation_freq",
+        "ch3_temp_oscillation_amp",
+        "ch4_temp_oscillation_freq",
+        "ch4_temp_oscillation_amp",
+        "ch5_temp_oscillation_freq",
+        "ch5_temp_oscillation_amp"
+      ],
+      "mean_accuracy": 1.0,
+      "delta_from_baseline": 0.03125
+    },
+    "decay3": {
+      "features": [
+        "ch0_decay_tau3",
+        "ch0_decay_a3",
+        "ch1_decay_tau3",
+        "ch1_decay_a3",
+        "ch2_decay_tau3",
+        "ch2_decay_a3",
+        "ch3_decay_tau3",
+        "ch3_decay_a3",
+        "ch4_decay_tau3",
+        "ch4_decay_a3",
+        "ch5_decay_tau3",
+        "ch5_decay_a3"
+      ],
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0
+    },
+    "hf_transient": {
+      "features": [
+        "ch0_temp_hf_transient",
+        "ch1_temp_hf_transient",
+        "ch2_temp_hf_transient",
+        "ch3_temp_hf_transient",
+        "ch4_temp_hf_transient",
+        "ch5_temp_hf_transient"
+      ],
+      "mean_accuracy": 0.96875,
+      "delta_from_baseline": 0.0
+    }
+  },
+  "diagnostic_validity": {
+    "placeholder": true,
+    "note": "Diagnostic-validity test on synthetic faults (drift/noise/poisoning). Not a substitute for labelled real-sensor-health data. Real validation needs known-good vs known-bad sensor recordings.",
+    "per_feature": {
+      "ch0_temp_hf_transient": {
+        "drift": {
+          "delta": -0.04797858639938113
+        },
+        "noise": {
+          "delta": 2.1122761101120773
+        },
+        "poisoned": {
+          "delta": -319.86266528318026
+        }
+      },
+      "ch0_temp_oscillation_freq": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": -0.30000000000000027
+        }
+      },
+      "ch0_temp_oscillation_amp": {
+        "drift": {
+          "delta": 5.684341886080802e-14
+        },
+        "noise": {
+          "delta": -2.698653280081942
+        },
+        "poisoned": {
+          "delta": -260.13847635177996
+        }
+      },
+      "ch1_temp_hf_transient": {
+        "drift": {
+          "delta": 0.03787783136777989
+        },
+        "noise": {
+          "delta": 2.0339627324625553
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_temp_oscillation_freq": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_temp_oscillation_amp": {
+        "drift": {
+          "delta": -5.684341886080802e-14
+        },
+        "noise": {
+          "delta": 2.758360965099939
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_temp_hf_transient": {
+        "drift": {
+          "delta": 0.02777707633646287
+        },
+        "noise": {
+          "delta": -3.220058826159743
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_temp_oscillation_freq": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_temp_oscillation_amp": {
+        "drift": {
+          "delta": 1.1368683772161603e-13
+        },
+        "noise": {
+          "delta": 11.694678097353801
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_temp_hf_transient": {
+        "drift": {
+          "delta": 0.007575566273487766
+        },
+        "noise": {
+          "delta": 3.528988058058701
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_temp_oscillation_freq": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_temp_oscillation_amp": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 7.7053516224864325
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_temp_hf_transient": {
+        "drift": {
+          "delta": 0.007575566273601453
+        },
+        "noise": {
+          "delta": -0.41447566619069676
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_temp_oscillation_freq": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_temp_oscillation_amp": {
+        "drift": {
+          "delta": -5.684341886080802e-14
+        },
+        "noise": {
+          "delta": 8.379066321576772
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_temp_hf_transient": {
+        "drift": {
+          "delta": 0.016616039890436696
+        },
+        "noise": {
+          "delta": 4.406897952808549
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_temp_oscillation_freq": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_temp_oscillation_amp": {
+        "drift": {
+          "delta": -1.7053025658242404e-13
+        },
+        "noise": {
+          "delta": 3.5655502358781064
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch0_health_drift_rate": {
+        "drift": {
+          "delta": 0.07110646835779269
+        },
+        "noise": {
+          "delta": -0.014569230791240423
+        },
+        "poisoned": {
+          "delta": -0.14732161160334692
+        }
+      },
+      "ch0_health_sensitivity_decay": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch0_health_noise_floor": {
+        "drift": {
+          "delta": -0.00041537956357048933
+        },
+        "noise": {
+          "delta": -0.009634662337203004
+        },
+        "poisoned": {
+          "delta": -0.13469901622516667
+        }
+      },
+      "ch0_health_hysteresis": {
+        "drift": {
+          "delta": -0.009035550074618426
+        },
+        "noise": {
+          "delta": -0.4766098204951201
+        },
+        "poisoned": {
+          "delta": -0.007071337325741056
+        }
+      },
+      "ch1_health_drift_rate": {
+        "drift": {
+          "delta": 0.06693622600685423
+        },
+        "noise": {
+          "delta": 0.021515753069861282
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_health_sensitivity_decay": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_health_noise_floor": {
+        "drift": {
+          "delta": -0.0016113904496236064
+        },
+        "noise": {
+          "delta": 0.004508154083057658
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_health_hysteresis": {
+        "drift": {
+          "delta": -0.6532676662338355
+        },
+        "noise": {
+          "delta": -0.3267515149269379
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_health_drift_rate": {
+        "drift": {
+          "delta": 0.0596334914994091
+        },
+        "noise": {
+          "delta": -0.0034234785528427566
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_health_sensitivity_decay": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_health_noise_floor": {
+        "drift": {
+          "delta": 0.0001073236415282397
+        },
+        "noise": {
+          "delta": -0.005921875064266696
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_health_hysteresis": {
+        "drift": {
+          "delta": -0.38834004318013005
+        },
+        "noise": {
+          "delta": -7.133477279767549
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_health_drift_rate": {
+        "drift": {
+          "delta": 0.05599044258047672
+        },
+        "noise": {
+          "delta": -0.01075264342634
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_health_sensitivity_decay": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_health_noise_floor": {
+        "drift": {
+          "delta": -0.0002752611478427369
+        },
+        "noise": {
+          "delta": 0.005997543393560567
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_health_hysteresis": {
+        "drift": {
+          "delta": 4.136371853499285
+        },
+        "noise": {
+          "delta": 0.10325664950740054
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_health_drift_rate": {
+        "drift": {
+          "delta": 0.07128404014129333
+        },
+        "noise": {
+          "delta": -0.03734307918926122
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_health_sensitivity_decay": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_health_noise_floor": {
+        "drift": {
+          "delta": 7.343697049930209e-05
+        },
+        "noise": {
+          "delta": -0.009207284845308167
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_health_hysteresis": {
+        "drift": {
+          "delta": -0.009099156730097646
+        },
+        "noise": {
+          "delta": 2.3658264089634926
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_health_drift_rate": {
+        "drift": {
+          "delta": 0.06112159116759868
+        },
+        "noise": {
+          "delta": 0.01610633811250204
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_health_sensitivity_decay": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.0
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_health_noise_floor": {
+        "drift": {
+          "delta": -0.001335001252115109
+        },
+        "noise": {
+          "delta": 0.002082561963956009
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_health_hysteresis": {
+        "drift": {
+          "delta": -0.006013035601254213
+        },
+        "noise": {
+          "delta": 1.8188955490928267
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch0_hw_circuit_response": {
+        "drift": {
+          "delta": 49.99999999999977
+        },
+        "noise": {
+          "delta": -1.1057537408278222
+        },
+        "poisoned": {
+          "delta": -1468.1922392884528
+        }
+      },
+      "ch0_hw_thermal_profile": {
+        "drift": {
+          "delta": 5.045951205113852
+        },
+        "noise": {
+          "delta": 3.374392932989963
+        },
+        "poisoned": {
+          "delta": -287.917371558609
+        }
+      },
+      "ch0_hw_adc_noise": {
+        "drift": {
+          "delta": 2.842170943040401e-14
+        },
+        "noise": {
+          "delta": 2.8976813664527015
+        },
+        "poisoned": {
+          "delta": -249.21646813538442
+        }
+      },
+      "ch1_hw_circuit_response": {
+        "drift": {
+          "delta": 50.0
+        },
+        "noise": {
+          "delta": 0.07776324628753173
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_hw_thermal_profile": {
+        "drift": {
+          "delta": -0.982115562944557
+        },
+        "noise": {
+          "delta": 1.139311479767457
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch1_hw_adc_noise": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.44098900964991117
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_hw_circuit_response": {
+        "drift": {
+          "delta": 50.0
+        },
+        "noise": {
+          "delta": 2.9220863016721523
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_hw_thermal_profile": {
+        "drift": {
+          "delta": 0.5316813009550287
+        },
+        "noise": {
+          "delta": -0.5774426223664477
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch2_hw_adc_noise": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": -2.8749694203090144
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_hw_circuit_response": {
+        "drift": {
+          "delta": 50.0
+        },
+        "noise": {
+          "delta": 2.0266230894617365
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_hw_thermal_profile": {
+        "drift": {
+          "delta": 4.5458701067582865
+        },
+        "noise": {
+          "delta": -0.34158253984446674
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch3_hw_adc_noise": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 0.7753524317597851
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_hw_circuit_response": {
+        "drift": {
+          "delta": 49.99999999999977
+        },
+        "noise": {
+          "delta": 1.2140338703120506
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_hw_thermal_profile": {
+        "drift": {
+          "delta": 0.9354925822294717
+        },
+        "noise": {
+          "delta": 1.560419689203684
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch4_hw_adc_noise": {
+        "drift": {
+          "delta": 5.684341886080802e-14
+        },
+        "noise": {
+          "delta": 1.272595783075758
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_hw_circuit_response": {
+        "drift": {
+          "delta": 50.0
+        },
+        "noise": {
+          "delta": 3.191564249603971
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_hw_thermal_profile": {
+        "drift": {
+          "delta": 3.3271762759277976
+        },
+        "noise": {
+          "delta": 2.554492577969654
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      },
+      "ch5_hw_adc_noise": {
+        "drift": {
+          "delta": 0.0
+        },
+        "noise": {
+          "delta": 2.95084153703192
+        },
+        "poisoned": {
+          "delta": 0.0
+        }
+      }
+    }
+  },
+  "runnable": true,
+  "feature_roles": {
+    "ch0_da_relative_amplitude": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_da_direction": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_da_rise_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_da_decay_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_da_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_da_endpoint_delta": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_da_relative_amplitude": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_da_direction": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_da_rise_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_da_decay_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_da_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_da_endpoint_delta": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_da_relative_amplitude": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_da_direction": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_da_rise_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_da_decay_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_da_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_da_endpoint_delta": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_da_relative_amplitude": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_da_direction": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_da_rise_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_da_decay_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_da_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_da_endpoint_delta": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_da_relative_amplitude": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_da_direction": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_da_rise_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_da_decay_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_da_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_da_endpoint_delta": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_da_relative_amplitude": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_da_direction": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_da_rise_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_da_decay_time": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_da_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_da_endpoint_delta": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_abs_raw_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch0_abs_baseline_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch0_abs_voltage": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch0_abs_calibrated_concentration": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch1_abs_raw_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch1_abs_baseline_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch1_abs_voltage": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch1_abs_calibrated_concentration": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch2_abs_raw_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch2_abs_baseline_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch2_abs_voltage": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch2_abs_calibrated_concentration": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch3_abs_raw_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch3_abs_baseline_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch3_abs_voltage": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch3_abs_calibrated_concentration": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch4_abs_raw_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch4_abs_baseline_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch4_abs_voltage": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch4_abs_calibrated_concentration": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch5_abs_raw_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch5_abs_baseline_resistance": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch5_abs_voltage": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch5_abs_calibrated_concentration": {
+      "role": "absolute",
+      "diagnostic_subrole": null
+    },
+    "ch0_temp_hf_transient": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch0_temp_oscillation_freq": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch0_temp_oscillation_amp": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch0_temp_response_latency": {
+      "role": "other",
+      "diagnostic_subrole": null
+    },
+    "ch1_temp_hf_transient": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch1_temp_oscillation_freq": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch1_temp_oscillation_amp": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch1_temp_response_latency": {
+      "role": "other",
+      "diagnostic_subrole": null
+    },
+    "ch2_temp_hf_transient": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch2_temp_oscillation_freq": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch2_temp_oscillation_amp": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch2_temp_response_latency": {
+      "role": "other",
+      "diagnostic_subrole": null
+    },
+    "ch3_temp_hf_transient": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch3_temp_oscillation_freq": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch3_temp_oscillation_amp": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch3_temp_response_latency": {
+      "role": "other",
+      "diagnostic_subrole": null
+    },
+    "ch4_temp_hf_transient": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch4_temp_oscillation_freq": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch4_temp_oscillation_amp": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch4_temp_response_latency": {
+      "role": "other",
+      "diagnostic_subrole": null
+    },
+    "ch5_temp_hf_transient": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch5_temp_oscillation_freq": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch5_temp_oscillation_amp": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "temporal_noise"
+    },
+    "ch5_temp_response_latency": {
+      "role": "other",
+      "diagnostic_subrole": null
+    },
+    "ch0_health_drift_rate": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_drift"
+    },
+    "ch0_health_sensitivity_decay": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch0_health_noise_floor": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_noise"
+    },
+    "ch0_health_hysteresis": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch1_health_drift_rate": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_drift"
+    },
+    "ch1_health_sensitivity_decay": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch1_health_noise_floor": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_noise"
+    },
+    "ch1_health_hysteresis": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch2_health_drift_rate": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_drift"
+    },
+    "ch2_health_sensitivity_decay": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch2_health_noise_floor": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_noise"
+    },
+    "ch2_health_hysteresis": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch3_health_drift_rate": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_drift"
+    },
+    "ch3_health_sensitivity_decay": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch3_health_noise_floor": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_noise"
+    },
+    "ch3_health_hysteresis": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch4_health_drift_rate": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_drift"
+    },
+    "ch4_health_sensitivity_decay": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch4_health_noise_floor": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_noise"
+    },
+    "ch4_health_hysteresis": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch5_health_drift_rate": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_drift"
+    },
+    "ch5_health_sensitivity_decay": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch5_health_noise_floor": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_noise"
+    },
+    "ch5_health_hysteresis": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "health_poisoning"
+    },
+    "ch0_hw_circuit_response": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_circuit"
+    },
+    "ch0_hw_thermal_profile": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_thermal"
+    },
+    "ch0_hw_adc_noise": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_adc"
+    },
+    "ch1_hw_circuit_response": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_circuit"
+    },
+    "ch1_hw_thermal_profile": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_thermal"
+    },
+    "ch1_hw_adc_noise": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_adc"
+    },
+    "ch2_hw_circuit_response": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_circuit"
+    },
+    "ch2_hw_thermal_profile": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_thermal"
+    },
+    "ch2_hw_adc_noise": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_adc"
+    },
+    "ch3_hw_circuit_response": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_circuit"
+    },
+    "ch3_hw_thermal_profile": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_thermal"
+    },
+    "ch3_hw_adc_noise": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_adc"
+    },
+    "ch4_hw_circuit_response": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_circuit"
+    },
+    "ch4_hw_thermal_profile": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_thermal"
+    },
+    "ch4_hw_adc_noise": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_adc"
+    },
+    "ch5_hw_circuit_response": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_circuit"
+    },
+    "ch5_hw_thermal_profile": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_thermal"
+    },
+    "ch5_hw_adc_noise": {
+      "role": "diagnostic",
+      "diagnostic_subrole": "hw_adc"
+    },
+    "ch0_advanced_saturation_index": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_decay_tau1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_decay_tau2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_decay_tau3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_decay_a1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_decay_a2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch0_decay_a3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_advanced_saturation_index": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_decay_tau1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_decay_tau2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_decay_tau3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_decay_a1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_decay_a2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch1_decay_a3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_advanced_saturation_index": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_decay_tau1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_decay_tau2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_decay_tau3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_decay_a1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_decay_a2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch2_decay_a3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_advanced_saturation_index": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_decay_tau1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_decay_tau2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_decay_tau3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_decay_a1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_decay_a2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch3_decay_a3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_advanced_saturation_index": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_decay_tau1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_decay_tau2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_decay_tau3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_decay_a1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_decay_a2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch4_decay_a3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_advanced_saturation_index": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_decay_tau1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_decay_tau2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_decay_tau3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_decay_a1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_decay_a2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "ch5_decay_a3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch0_ch1": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch0_ch2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch0_ch3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch0_ch4": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch0_ch5": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch1_ch2": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch1_ch3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch1_ch4": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch1_ch5": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch2_ch3": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch2_ch4": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch2_ch5": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch3_ch4": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch3_ch5": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "sel_ratio_ch4_ch5": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "global_max_delta_ratio": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "global_mean_delta_ratio": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "global_n_active_channels": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    },
+    "global_total_auc": {
+      "role": "discrimination",
+      "diagnostic_subrole": null
+    }
+  },
+  "group_membership": {
+    "DeviceAgnostic_Amplitude": [
+      0,
+      1,
+      6,
+      7,
+      12,
+      13,
+      18,
+      19,
+      24,
+      25,
+      30,
+      31
+    ],
+    "DeviceAgnostic_Kinetics": [
+      2,
+      3,
+      8,
+      9,
+      14,
+      15,
+      20,
+      21,
+      26,
+      27,
+      32,
+      33
+    ],
+    "Advanced_Decay": [
+      3,
+      9,
+      15,
+      21,
+      27,
+      33,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167
+    ],
+    "DeviceAgnostic_IntegralEndpoint": [
+      4,
+      5,
+      10,
+      11,
+      16,
+      17,
+      22,
+      23,
+      28,
+      29,
+      34,
+      35
+    ],
+    "Absolute": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "Temporal": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83
+    ],
+    "Health": [
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107
+    ],
+    "Hardware": [
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125
+    ],
+    "Advanced_SaturationIndex": [
+      126,
+      133,
+      140,
+      147,
+      154,
+      161
+    ],
+    "SelectivityRatios": [
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182
+    ],
+    "Global": [
+      183,
+      184,
+      185,
+      186
+    ]
+  },
+  "n_substances": 8,
+  "n_recordings": 48,
+  "chance_level": 0.125,
+  "baseline_accuracy": 0.96875,
+  "baseline_std": 0.03125,
+  "protocol_compliance": {
+    "dataset": "SmellNet",
+    "composite": "exposure_ramp",
+    "per_substance_modes": {
+      "exposure_ramp": 7,
+      "recovery": 1
+    },
+    "note": "SmellNet recordings are ~60s monotonic exposure ramps with NO recovery/desorption phase. Therefore kinetics/decay/hysteresis (recovery-phase) features are DEGENERATE here. Ablation deltas for those groups on this data are NOT evidence about their true discrimination power. Only protocol-collected data (baseline->exposure->recovery) can validate them."
+  },
+  "removal_candidates": {
+    "voltage": {
+      "features": [
+        "ch0_abs_voltage",
+        "ch1_abs_voltage",
+        "ch2_abs_voltage",
+        "ch3_abs_voltage",
+        "ch4_abs_voltage",
+        "ch5_abs_voltage"
+      ],
+      "delta": 0.03125
+    },
+    "circuit_response": {
+      "features": [
+        "ch0_hw_circuit_response",
+        "ch1_hw_circuit_response",
+        "ch2_hw_circuit_response",
+        "ch3_hw_circuit_response",
+        "ch4_hw_circuit_response",
+        "ch5_hw_circuit_response"
+      ],
+      "delta": 0.03125
+    },
+    "oscillation": {
+      "features": [
+        "ch0_temp_oscillation_freq",
+        "ch0_temp_oscillation_amp",
+        "ch1_temp_oscillation_freq",
+        "ch1_temp_oscillation_amp",
+        "ch2_temp_oscillation_freq",
+        "ch2_temp_oscillation_amp",
+        "ch3_temp_oscillation_freq",
+        "ch3_temp_oscillation_amp",
+        "ch4_temp_oscillation_freq",
+        "ch4_temp_oscillation_amp",
+        "ch5_temp_oscillation_freq",
+        "ch5_temp_oscillation_amp"
+      ],
+      "delta": 0.03125
+    }
+  },
+  "diagnostic_responsive_features": {
+    "drift": [
+      "ch0_temp_hf_transient",
+      "ch1_temp_hf_transient",
+      "ch2_temp_hf_transient",
+      "ch3_temp_hf_transient",
+      "ch4_temp_hf_transient",
+      "ch5_temp_hf_transient",
+      "ch0_health_drift_rate",
+      "ch0_health_noise_floor",
+      "ch0_health_hysteresis",
+      "ch1_health_drift_rate",
+      "ch1_health_noise_floor",
+      "ch1_health_hysteresis",
+      "ch2_health_drift_rate",
+      "ch2_health_noise_floor",
+      "ch2_health_hysteresis",
+      "ch3_health_drift_rate",
+      "ch3_health_noise_floor",
+      "ch3_health_hysteresis",
+      "ch4_health_drift_rate",
+      "ch4_health_noise_floor",
+      "ch4_health_hysteresis",
+      "ch5_health_drift_rate",
+      "ch5_health_noise_floor",
+      "ch5_health_hysteresis",
+      "ch0_hw_circuit_response",
+      "ch0_hw_thermal_profile",
+      "ch1_hw_circuit_response",
+      "ch1_hw_thermal_profile",
+      "ch2_hw_circuit_response",
+      "ch2_hw_thermal_profile",
+      "ch3_hw_circuit_response",
+      "ch3_hw_thermal_profile",
+      "ch4_hw_circuit_response",
+      "ch4_hw_thermal_profile",
+      "ch5_hw_circuit_response",
+      "ch5_hw_thermal_profile"
+    ],
+    "noise": [
+      "ch0_temp_hf_transient",
+      "ch0_temp_oscillation_amp",
+      "ch1_temp_hf_transient",
+      "ch1_temp_oscillation_amp",
+      "ch2_temp_hf_transient",
+      "ch2_temp_oscillation_amp",
+      "ch3_temp_hf_transient",
+      "ch3_temp_oscillation_amp",
+      "ch4_temp_hf_transient",
+      "ch4_temp_oscillation_amp",
+      "ch5_temp_hf_transient",
+      "ch5_temp_oscillation_amp",
+      "ch0_health_drift_rate",
+      "ch0_health_noise_floor",
+      "ch0_health_hysteresis",
+      "ch1_health_drift_rate",
+      "ch1_health_noise_floor",
+      "ch1_health_hysteresis",
+      "ch2_health_drift_rate",
+      "ch2_health_noise_floor",
+      "ch2_health_hysteresis",
+      "ch3_health_drift_rate",
+      "ch3_health_noise_floor",
+      "ch3_health_hysteresis",
+      "ch4_health_drift_rate",
+      "ch4_health_noise_floor",
+      "ch4_health_hysteresis",
+      "ch5_health_drift_rate",
+      "ch5_health_noise_floor",
+      "ch5_health_hysteresis",
+      "ch0_hw_circuit_response",
+      "ch0_hw_thermal_profile",
+      "ch0_hw_adc_noise",
+      "ch1_hw_circuit_response",
+      "ch1_hw_thermal_profile",
+      "ch1_hw_adc_noise",
+      "ch2_hw_circuit_response",
+      "ch2_hw_thermal_profile",
+      "ch2_hw_adc_noise",
+      "ch3_hw_circuit_response",
+      "ch3_hw_thermal_profile",
+      "ch3_hw_adc_noise",
+      "ch4_hw_circuit_response",
+      "ch4_hw_thermal_profile",
+      "ch4_hw_adc_noise",
+      "ch5_hw_circuit_response",
+      "ch5_hw_thermal_profile",
+      "ch5_hw_adc_noise"
+    ],
+    "poisoned": [
+      "ch0_temp_hf_transient",
+      "ch0_temp_oscillation_freq",
+      "ch0_temp_oscillation_amp",
+      "ch0_health_drift_rate",
+      "ch0_health_noise_floor",
+      "ch0_health_hysteresis",
+      "ch0_hw_circuit_response",
+      "ch0_hw_thermal_profile",
+      "ch0_hw_adc_noise"
+    ]
+  },
+  "duration_s": 90.27
+}

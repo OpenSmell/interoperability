@@ -1,0 +1,73 @@
+{
+  "$schema": "https://opensmell.org/schemas/sensor_profile_v1.json",
+  "schema_version": "1.0.0",
+  "sensor_profile": {
+    "device_id": "example-rig-001",
+    "manufacturer": "OpenSmell Reference",
+    "model": "OpenSmell v0 Reference Rig",
+    "firmware_version": "1.2.3",
+    "recording_protocol": {
+      "name": "osmell_baseline_exposure_recovery",
+      "baseline_seconds": 30,
+      "exposure_seconds": 45,
+      "recovery_seconds": 120,
+      "sample_rate_hz": 10
+    },
+    "channels": [
+      {
+        "channel_id": 0,
+        "sensor_model": "MQ-3",
+        "target_gases": ["ethanol", "alcohol"],
+        "material": "SnO2",
+        "doping_type": "n-type",
+        "nominal_sensitivity_a": 0.5,
+        "nominal_exponent_b": -0.6,
+        "heater_voltage": 5.0,
+        "heater_power_w": 0.8,
+        "operating_surface_temp_c": 250
+      },
+      {
+        "channel_id": 1,
+        "sensor_model": "MQ-135",
+        "target_gases": ["NH3", "benzene", "CO2"],
+        "material": "SnO2",
+        "doping_type": "n-type",
+        "nominal_sensitivity_a": 1.0,
+        "nominal_exponent_b": -0.5,
+        "heater_voltage": 5.0,
+        "heater_power_w": 0.8,
+        "operating_surface_temp_c": 200
+      }
+    ],
+    "circuit": {
+      "supply_voltage_vcc": 5.0,
+      "load_resistor_rl_ohm": 1000.0,
+      "is_voltage_divider": true,
+      "adc_bits": 12,
+      "adc_reference_voltage": 3.3,
+      "adc_max_count": 4095
+    },
+    "environment": {
+      "has_temp_humidity_sensor": true,
+      "temp_sensor_model": "DHT11",
+      "humidity_compensation": {
+        "temp_coeff_per_c": 0.002,
+        "humidity_coeff_per_pct": 0.001,
+        "reference_temp_c": 25,
+        "reference_humidity_pct": 50
+      }
+    },
+    "gas_delivery": {
+      "intake_flow_lpm": 3.5,
+      "has_ptfe_filter": true,
+      "filter_pore_um": 0.2,
+      "chamber_volume_ml": 50,
+      "flush_time_seconds": 60
+    },
+    "compliance": {
+      "records_osmell_osm": true,
+      "calibration_method": "median_first_15pct",
+      "baseline_established": true
+    }
+  }
+}

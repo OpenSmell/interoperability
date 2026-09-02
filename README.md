@@ -2,6 +2,40 @@
 
 This repository contains the canonical experiments for the modular feature framework for digital olfaction, as described in the paper "Towards Interoperable Digital Olfaction: A Modular Feature Framework for Electronic Noses": session-invariance on a single rig (the demonstrated result), the failure of zero-shot cross-device transfer, and the reference-point calibration path to a concentration-reading instrument.
 
+## TL;DR — the honest one-paragraph summary
+
+OpenSmell is building the engineering stack for smell (the way we have one for images and audio): open SDK, open protocol, open data. **What this repo proves:** a framework that extracts physically-grounded features from MOX sensor time-series, with session-invariance on a single rig (88.5%), and a formal proof (`R_s/R_0` normalization) bounding what *can* and *cannot* transfer across devices. **What it does NOT prove:** that a MOX array can identify individual molecules device-invariantly — it can't without per-rig calibration; and the four-category "strong/weak × reducing/oxidizing" scheme is *not* validated (see below). The honest, data-backed result is a **device-invariant response-type structure** (2 clusters among reducing targets). The **only** axis that transfers across a device family is the coarse A3 cross-sensor selectivity fingerprint — everything finer is provably device-bound.
+
+## Start here
+
+- **New to this repo?** See [What this repo proves / does not prove](#what-this-repo-proves--does-not-prove), then [Quick Start](#quick-start).
+- **Want the newest research?** The measured-phenotype ontology (response-type clusters, falsification attempt on the 4-category scheme, open research questions + data requests) lives in [`perception-layer/`](perception-layer/README.md).
+- **Looking for the SDK?** `pip install opensmell` — feature extractor, monitor, and calibration live in the SDK, not here.
+- **Want to contribute data?** See [Contributing](#contributing); priority gaps are protocol recordings, oxidizing targets, and labelled concentrations.
+
+## What this repo proves / does not prove
+
+**Proven (with real data, measured — not asserted):**
+
+| Claim | Where | Result |
+|-------|-------|--------|
+| Session-invariance on one rig | Experiment 1 | 88.5% across held-out sessions |
+| Leave-substance-out consistency | Experiment 2 | 67.4% on novel substances |
+| `R_s/R_0` cancels circuit params (`Vcc`, `R_L`) | Overview + SDK | Theorem 2: only sensor constants `(a,b)` survive |
+| Zero-shot cross-device transfer fails | Experiment 7 | 10–18% vs 25% chance; consistent with Theorem 2 |
+| Device-invariant *response-type* structure (A3 selectivity) | `perception-layer/` | 2 clusters across 10 UCI drift batches; gas purity 0.405 |
+
+**Does NOT prove (and why):**
+
+| Claim | Status |
+|-------|--------|
+| Individual molecule ID device-invariantly | **Impossible without per-rig calibration** (Theorem 2) |
+| "Strong vs weak" amplitude split | **Falsified** on real data — continuous gradient, not two classes (see `perception-layer/docs/FALSIFYING_FOUR_CATEGORY.md`) |
+| Oxidizing categories (NO₂/O₃/Cl₂) | **Untested** — no oxidizing data in corpus (open question, `perception-layer/docs/OPEN_QUESTIONS.md`) |
+| Kinetics as an orthogonal axis | **Untested** — no `baseline→exposure→recovery` protocol data (open question) |
+
+> These limits are not dismissals; they are the *open research questions* the project actively wants data to resolve. See `perception-layer/docs/OPEN_QUESTIONS.md` for the exact data each one needs.
+
 ## Overview
 
 The framework extracts device-agnostic features from MOX sensor time-series along five dimensions (device-agnostic, absolute, temporal, health, hardware). The key contribution is the proof that $R_s/R_0$ normalization cancels both $V_{cc}$ and $R_L$ completely — which bounds what can and cannot transfer across devices: sensor constants $(a, b)$ do not cancel, so zero-shot transfer fails (Experiment 7) and calibration is per-rig.
@@ -90,13 +124,19 @@ python3 run_all.py
 
 ## Data Sources
 
+> **Data download requirements (what auto-fetches vs. what's manual):**
+
+> - **SmellNet** — *auto-fetched* from HuggingFace (`DeweiFeng/smell-net`). No manual setup. Used by canonical 1, 2 and alignment 1, 2, 5, 6.
+> - **UCI Gas Drift + UCI mixtures** — *manual download* required (research-only license). Without these, experiments 3, 7 and alignment 3, 4, 7 fail with a clear "data not found" message.
+> - **Praise James' rig / OSMO taxonomy** — results are *pre-computed and documented*; no re-run needed.
+
 ### SmellNet (canonical 1, 2; alignment 1, 2, 5, 6)
-- Automatically fetched from HuggingFace: `DeweiFeng/smell-net`
+
+- **Auto-fetched** from HuggingFace: `DeweiFeng/smell-net` — no manual setup required
 - 50 food substances, 6 MOX sensors, multiple sessions
 - Citation: Feng, D., Dai, W., Li, C., Pernigo, A., Wen, Y. & Liang, P. P.
   "SmellNet: A Large-scale Dataset for Real-world Smell Recognition."
   arXiv:2506.00239 (2025); ICLR 2026.
-- No manual setup required
 - Alignment experiments use a local mirror at `../SmellNet/neurips-data-processed/`
   (also mirrored on HuggingFace); the Praise James' rig session cache is
   `alignment_experiments/experiment_1_features_cache.npz` (gitignored).
@@ -106,14 +146,15 @@ python3 run_all.py
   <https://github.com/osmoai/taxonomy>
 
 ### UCI Gas Sensor Array Drift (canonical 3; alignment 3, 4, 7)
-- Download from: https://archive.ics.uci.edu/ml/datasets/gas+sensor+array+drift+dataset
+- **Manual download required** (research-only license): https://archive.ics.uci.edu/ml/datasets/gas+sensor+array+drift+dataset
 - Extract to: `data/uci/gas+sensor+array+drift+dataset/Dataset/`
 - Should contain `batch1.dat` through `batch10.dat`
 - 6 pure gases, 16 MOX sensors, 10 batches over 36 months
 
 ### UCI Dynamic / Turbulent Mixtures (alignment 3, 4)
-- Dynamic mixtures: https://archive.ics.uci.edu/dataset/322/gas+sensor+array+under+dynamic+gas+mixtures
-- Turbulent mixtures: https://archive.ics.uci.edu/dataset/309/gas+sensor+array+exposed+to+turbulent+gas+mixtures
+- **Manual download required**: 
+  - Dynamic mixtures: https://archive.ics.uci.edu/dataset/322/gas+sensor+array+under+dynamic+gas+mixtures
+  - Turbulent mixtures: https://archive.ics.uci.edu/dataset/309/gas+sensor+array+exposed+to+turbulent+gas+mixtures
 - Extract into `alignment_experiments/data/{dynamic,turbulent}-mixtures/`
 - 16 MOX sensors under varying concentration/gas-composition profiles; research-only license (validation, not product training)
 

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://opensmell.org/schemas/sensor_profile_v1.json",
+  "schema_version": "1.0.0",
+  "sensor_profile": {
+    "device_id": "YOUR-DEVICE-ID",
+    "manufacturer": "",
+    "model": "",
+    "firmware_version": "",
+    "recording_protocol": {
+      "name": "osmell_baseline_exposure_recovery",
+      "baseline_seconds": null,
+      "exposure_seconds": null,
+      "recovery_seconds": null,
+      "sample_rate_hz": null
+    },
+    "channels": [
+      {
+        "channel_id": 0,
+        "sensor_model": "",
+        "target_gases": [],
+        "material": "",
+        "doping_type": "",
+        "nominal_sensitivity_a": null,
+        "nominal_exponent_b": null,
+        "heater_voltage": null,
+        "heater_power_w": null,
+        "operating_surface_temp_c": null
+      }
+    ],
+    "circuit": {
+      "supply_voltage_vcc": null,
+      "load_resistor_rl_ohm": null,
+      "is_voltage_divider": true,
+      "adc_bits": null,
+      "adc_reference_voltage": null,
+      "adc_max_count": null
+    },
+    "environment": {
+      "has_temp_humidity_sensor": false,
+      "humidity_compensation": {
+        "temp_coeff_per_c": null,
+        "humidity_coeff_per_pct": null,
+        "reference_temp_c": null,
+        "reference_humidity_pct": null
+      }
+    },
+    "gas_delivery": {
+      "intake_flow_lpm": null,
+      "has_ptfe_filter": false,
+      "filter_pore_um": null,
+      "chamber_volume_ml": null,
+      "flush_time_seconds": null
+    },
+    "compliance": {
+      "records_osmell_osm": false,
+      "calibration_method": "",
+      "baseline_established": false
+    }
+  }
+}

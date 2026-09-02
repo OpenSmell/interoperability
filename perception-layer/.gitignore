@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+
+# Heavy runtime artifacts (reproducible via the scripts) — do not commit.
+# The sample full_ablation.json is explicitly tracked via the negation below.
+results/*.json
+!results/full_ablation.json
