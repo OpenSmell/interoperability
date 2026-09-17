@@ -6,6 +6,72 @@ This repository contains the canonical experiments for the modular feature frame
 
 OpenSmell is building the engineering stack for smell (the way we have one for images and audio): open SDK, open protocol, open data. **What this repo proves:** a framework that extracts physically-grounded features from MOX sensor time-series, with session-invariance on a single rig (88.5%), and a formal proof (`R_s/R_0` normalization) bounding what *can* and *cannot* transfer across devices. **What it does NOT prove:** that a MOX array can identify individual molecules device-invariantly — it can't without per-rig calibration; and the four-category "strong/weak × reducing/oxidizing" scheme is *not* validated (see below). The honest, data-backed result is a **device-invariant response-type structure** (2 clusters among reducing targets). The **only** axis that transfers across a device family is the coarse A3 cross-sensor selectivity fingerprint — everything finer is provably device-bound.
 
+## The position in 2026: what we know, what we can ship, what we cannot
+
+This repository's experiments established the *representation* boundary: 88.5%
+session-invariance on one rig, zero-shot cross-device transfer at ~chance. Since
+that finding, four more measured facts (the open `benchmarks/` suite,
+`reports/metrics_summary.json`, 19/19 green) sharpen the picture into a
+deployment position.
+
+**1. Memory is a third corruptor (alongside drift and environment).** A MOX
+array's recovery after exposure is bi-exponential in 97% of fitted tails
+(τ_fast ≈ 15–25 s, τ_slow ≈ 45–60 s) — a single exponential is wrong. Across
+identical (gas,ppm) configs the clean-gap length alone drives the next
+amplitude (correlation −0.36 to −0.41): a short gap suppresses the next
+response. Self-priming is positive overall (+0.152 vs cross-priming, 27/32
+config-channel groups) but its sign is gas/device-specific — memory cannot be a
+single scalar.
+
+**2. Most anomaly-detector false positives are memory, not algorithm.** Running
+the production residual axes (Kalman innovation, latent-Δ, EWMA level, fused
+max-|z|) on ground-truth schedules, the clean-air FP floor is 0.36 after ≥60 s
+of air but **0.054 after ≥300 s**; the excess (+0.216 median, 62% of residual
+FP) is physical memory residue. FP peaks at 30–60 s post-exposure — exactly on
+the slow component (τ 45–60 s). Improving the filter is not the lever;
+inter-event spacing ≥300 s (or memory-deconvolved residuals) is.
+
+**3. Identifiability is bounded where it matters.** Matched-dose cross-gas
+pairs resolve in 0.5 s on clean windows, but same-gas dose discrimination has a
+hard ceiling (CO-L vs CO-M: 0.779 — impossible at any window). Two pairs are
+impossible clean; four are impossible under worst-case memory (gap 1 s). A
+consumer gets fast gas *screening* from one window, not a concentration
+reading.
+
+**4. Of 272 repository features, 98 (36%) are both transferable and
+fully-defined.** The SDK framework contributes 34 transferable / 39
+device-bound / 42 calibration-bound / 72 protocol-confounded; the `phys_`
+primitives add 67 / 6 / 12. Survivors = the `_da_` amplitude/dose family,
+selectivity ratios, saturation index, and the `phys_`
+normalized/direction/covariance primitives. **Every kinetic/decay/recovery
+feature is protocol-confounded** and must not be shared raw.
+
+### Strategy: anomaly utility first, interoperability second
+
+The measured facts give the deployment answer: what ships now, what ships when.
+
+- **Deployable now (anomaly utility does not wait for interoperability):**
+  event/anomaly detection on one device — memory-aware baseline, ≥300 s
+  safe-gap, T/RH covariates. Events are measured-deployable; substance
+  identification is ~chance LOO and is **not** shipped.
+- **Deployable within a device:** smell *screening* at 88.5% session-invariance
+  using the `_da_` + selectivity core, *with* memory-safe anchoring. The naive
+  R/R₀ = 37.5% result is the counterexample that made this non-obvious: naive
+  normalization against a memory-corrupted R0 *injects* session noise.
+  Session-invariance is memory-safe anchoring, not free normalization.
+- **Interoperability path, in order:** (1) a memory-safe normalization
+  contract — per-session R0, ≥300 s recovery floor, bi-exponential correction;
+  (2) a feature whitelist (the 98 transferable+fully-defined) and protocol
+  slots in the data-commons schema; (3) per-device calibration metadata in
+  every upload so consumers can recentre (LOO recovers 0.867–0.893 vs 10–18%
+  zero-shot).
+
+Base value: a deployed monitoring/anomaly capability and within-device
+screening are achievable **before** interoperability is perfect. Shared data
+then *raise* the value of recordings already being made by every deployed
+device — interoperability compounds the base value the device already has, it
+is not the precondition for it.
+
 ## Start here
 
 - **New to this repo?** See [What this repo proves / does not prove](#what-this-repo-proves--does-not-prove), then [Quick Start](#quick-start).
